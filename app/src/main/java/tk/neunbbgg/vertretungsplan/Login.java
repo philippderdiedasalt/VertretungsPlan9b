@@ -43,7 +43,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     startActivity(new Intent(this, Menu.class));
                     break;
                 }
-
+                
             }
                 AlertDialog ad = new AlertDialog.Builder(this).create();
                 ad.setCancelable(false); // This blocks the 'BACK' button
