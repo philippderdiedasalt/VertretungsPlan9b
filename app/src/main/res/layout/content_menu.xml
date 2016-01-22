@@ -52,4 +52,17 @@
         android:layout_toEndOf="@+id/th"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AutoLogin"
+        android:id="@+id/cb"
+        android:layout_marginBottom="20dp"
+        android:checked="false"
+        android:layout_above="@+id/pm"
+        android:layout_alignLeft="@+id/th"
+        android:onClick="onCheckboxClicked"/>
+        android:layout_alignStart="@+id/th" />
+
 </RelativeLayout>
