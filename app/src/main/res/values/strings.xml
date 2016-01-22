@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VertretungsPlan</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_vertretungs_plan_heute">VertretungsPlan_heute</string>
+    <string name="title_activity_vplan2">vplan2</string>
+    <string name="title_activity_plan1">plan1</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_plan2">Plan2</string>
+</resources>
