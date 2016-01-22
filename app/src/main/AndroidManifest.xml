@@ -36,10 +36,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Menu"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Plan2"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_plan2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
