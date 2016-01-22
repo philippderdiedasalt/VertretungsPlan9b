@@ -62,7 +62,7 @@
         android:checked="false"
         android:layout_above="@+id/pm"
         android:layout_alignLeft="@+id/th"
-        android:onClick="onCheckboxClicked"/>
+        android:onClick="onCheckboxClicked"
         android:layout_alignStart="@+id/th" />
 
 </RelativeLayout>

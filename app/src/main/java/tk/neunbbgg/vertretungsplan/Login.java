@@ -1,8 +1,10 @@
 package tk.neunbbgg.vertretungsplan;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,16 +14,34 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
-
+    public static final String DEFAULT="N/A";
     Button bLogin;
     EditText etUsername;
     EditText etPassword;
     ImageView pl;
 
+    public static final String PREFS_NAME = "MyPrefsFile";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String autologin = sharedPreferences.getString("ischecked", DEFAULT);
+
+        if (autologin.equals("1")){
+
+            startActivity(new Intent(this,Menu.class));
+        }
+
+
+
+
+
+
+
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -30,7 +50,12 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         pl.setOnClickListener(this);
         bLogin.setOnClickListener(this);
 
-    }
+
+
+
+
+
+}
 
     @Override
     public void onClick(View v) {
@@ -43,7 +68,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     startActivity(new Intent(this, Menu.class));
                     break;
                 }
-                
+
             }
                 AlertDialog ad = new AlertDialog.Builder(this).create();
                 ad.setCancelable(false); // This blocks the 'BACK' button
@@ -67,4 +92,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         }
     }
+
+
 }
+

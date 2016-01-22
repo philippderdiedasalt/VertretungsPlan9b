@@ -1,6 +1,8 @@
 package tk.neunbbgg.vertretungsplan;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Menu extends ActionBarActivity implements View.OnClickListener {
 
@@ -16,18 +19,26 @@ public class Menu extends ActionBarActivity implements View.OnClickListener {
     TextView th, tm;
     ImageView pm;
     CheckBox cb;
+    public static final String DEFAULT="N/A";
+    public String path = "/variables";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String autologin = sharedPreferences.getString("ischecked", DEFAULT);
+
+
 
         blogout = (Button) findViewById(R.id.blogout);
         th = (TextView) findViewById(R.id.th);
         tm = (TextView) findViewById(R.id.tm);
         pm = (ImageView) findViewById(R.id.pm);
         cb = (CheckBox) findViewById(R.id.cb);
-
+        if (autologin.equals("1")){
+            cb.setChecked(true);
+        }
 
         th.setOnClickListener(this);
         tm.setOnClickListener(this);
@@ -78,11 +89,21 @@ public class Menu extends ActionBarActivity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.cb:
                 if (checked){
+                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("ischecked", "1");
+                    editor.commit();
 
+                    Toast.makeText(this,"Gespeichert!",Toast.LENGTH_LONG).show();
                 }
                 // Put some meat on the sandwich
                 else{
+                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("ischecked", "0");
+                    editor.commit();
 
+                    Toast.makeText(this,"Gespeichert!",Toast.LENGTH_LONG).show();
                 }
                 // Remove the meat
                 break;
