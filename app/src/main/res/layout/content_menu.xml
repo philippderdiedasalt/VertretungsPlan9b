@@ -53,6 +53,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp" />
 
+
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
         android:layout_above="@+id/pm"
         android:layout_alignLeft="@+id/th"
         android:onClick="onCheckboxClicked"
+        android:layout_marginTop="10dp"
         android:layout_alignStart="@+id/th" />
 
 </RelativeLayout>

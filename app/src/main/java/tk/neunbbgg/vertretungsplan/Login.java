@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Login extends ActionBarActivity implements View.OnClickListener {
     public static final String DEFAULT="N/A";
     Button bLogin;
@@ -30,6 +35,10 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
+
+
+
+
 
         if (autologin.equals("1")){
 
@@ -55,11 +64,33 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
 
 
-}
 
+}
+    public static void maindownload() throws IOException {
+
+    }
+
+    public static void main() {
+        try {
+            File file = new File("ver.txt");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuffer.append(line);
+                stringBuffer.append("\n");
+            }
+            fileReader.close();
+            System.out.println("Contents of file:");
+            System.out.println(stringBuffer.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()){
             case R.id.bLogin:
 
             if (etUsername.getText().toString().equals("9b")){

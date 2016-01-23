@@ -36,6 +36,8 @@ public class Menu extends ActionBarActivity implements View.OnClickListener {
         tm = (TextView) findViewById(R.id.tm);
         pm = (ImageView) findViewById(R.id.pm);
         cb = (CheckBox) findViewById(R.id.cb);
+
+
         if (autologin.equals("1")){
             cb.setChecked(true);
         }
@@ -75,7 +77,7 @@ public class Menu extends ActionBarActivity implements View.OnClickListener {
 
                 break;
 
-            case R.id.cb:
+
 
         }
 

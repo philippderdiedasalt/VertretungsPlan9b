@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tk.neunbbgg.vertretungsplan"
     android:versionCode="1"
-
-    package="tk.neunbbgg.vertretungsplan">
+    android:versionName="1">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -39,13 +39,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Menu"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_menu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Plan2"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_plan2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Gameview"
+            android:label="@string/title_activity_gameview"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
