@@ -54,14 +54,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".plan1Activity"
-            android:screenOrientation="portrait"
             android:label="Heute Plan"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".plan2Activity"
             android:label="Morgen Plan"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".kalenderActivity"
+            android:label="@string/title_activity_kalender"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
