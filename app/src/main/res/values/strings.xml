@@ -11,4 +11,5 @@
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_plan2">Plan2</string>
     <string name="title_activity_gameview">Gameview</string>
+    <string name="title_activity_navi">naviActivity</string>
 </resources>

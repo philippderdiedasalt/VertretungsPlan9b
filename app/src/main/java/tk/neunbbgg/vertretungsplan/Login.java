@@ -42,7 +42,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         if (autologin.equals("1")){
 
-            startActivity(new Intent(this,Menu.class));
+            startActivity(new Intent(this,naviActivity.class));
         }
 
 
