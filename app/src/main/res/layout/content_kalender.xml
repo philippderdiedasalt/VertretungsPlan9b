@@ -18,8 +18,7 @@
         android:id="@+id/calendarView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
+
         android:firstDayOfWeek="2"
         android:showWeekNumber="false" />
 </RelativeLayout>
