@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Start" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Bilder" />
+
+    </group>
+
+    <item android:title="Vertretungspläne">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_subject_black_24dp"
+                android:title="heute" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_subject_black_24dp"
+                android:title="morgen" />
+        </menu>
+    </item>
+
+</menu>
