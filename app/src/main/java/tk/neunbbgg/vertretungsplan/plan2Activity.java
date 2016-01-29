@@ -90,11 +90,7 @@ public class plan2Activity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             startActivity(new Intent(this, naviActivity.class));
         } else if (id == R.id.nav_gallery) {
-            startActivity(new Intent(this, kalenderActivity.class));
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(this, bilderActivity.class));
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {

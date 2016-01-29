@@ -21,6 +21,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     Button blogout1;
@@ -29,12 +34,38 @@ public class naviActivity extends AppCompatActivity
     CheckBox cb1;
     public static final String DEFAULT="N/A";
     public String path = "/variables";
+    InputStream is;
+    ArrayList<String> results = new ArrayList<String>();
+    JSONObject json_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
 
@@ -67,6 +98,8 @@ public class naviActivity extends AppCompatActivity
         blogout1.setOnClickListener(this);
         pm1.setOnClickListener(this);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -109,11 +142,7 @@ public class naviActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            startActivity(new Intent(this, kalenderActivity.class));
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(this, bilderActivity.class));
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {

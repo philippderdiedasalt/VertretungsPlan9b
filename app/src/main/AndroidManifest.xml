@@ -63,8 +63,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".kalenderActivity"
-            android:label="@string/title_activity_kalender"
+            android:name=".bilderActivity"
+            android:label="Bilder"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
