@@ -66,6 +66,11 @@
             android:name=".bilderActivity"
             android:label="Bilder"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mensaActivity"
+            android:label="Mensaplan"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

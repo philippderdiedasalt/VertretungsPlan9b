@@ -48,6 +48,8 @@ public class plan1Activity extends AppCompatActivity
         baktualisieren12 = (Button) findViewById(R.id.baktualisieren12);
         WebView12 =(WebView)findViewById(R.id.WebView12);
         baktualisieren12.setOnClickListener(this);
+        String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
+        WebView12.loadUrl(url);
     }
 
     @Override
@@ -94,6 +96,8 @@ public class plan1Activity extends AppCompatActivity
             startActivity(new Intent(this, bilderActivity.class));
         }  else if (id == R.id.nav_share) {
             //nichts eigene class
+        } else if (id == R.id.nav_slideshow) {
+            startActivity(new Intent(this, mensaActivity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, plan2Activity.class));
 

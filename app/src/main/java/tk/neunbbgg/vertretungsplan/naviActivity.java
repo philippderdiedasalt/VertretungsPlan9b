@@ -143,6 +143,8 @@ public class naviActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
             startActivity(new Intent(this, bilderActivity.class));
+        } else if (id == R.id.nav_slideshow) {
+            startActivity(new Intent(this, mensaActivity.class));
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {

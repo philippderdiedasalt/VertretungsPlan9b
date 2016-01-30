@@ -4,12 +4,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_play_arrow_black_24dp"
             android:title="Start" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Bilder" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_local_dining_black_24dp"
+            android:title="Mensaplan"/>
 
     </group>
 

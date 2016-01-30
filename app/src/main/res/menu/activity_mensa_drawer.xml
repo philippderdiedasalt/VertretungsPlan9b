@@ -14,9 +14,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_local_dining_black_24dp"
             android:title="Mensaplan"/>
+
     </group>
 
-    <item android:title="Vertretungspläne">
+    <item android:title="Vetretungspläne">
         <menu>
             <item
                 android:id="@+id/nav_share"
