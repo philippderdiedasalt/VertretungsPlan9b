@@ -149,6 +149,8 @@ public class naviActivity extends AppCompatActivity
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, plan2Activity.class));
+        }else if (id == R.id.nav_view) {
+            startActivity(new Intent(this, haActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

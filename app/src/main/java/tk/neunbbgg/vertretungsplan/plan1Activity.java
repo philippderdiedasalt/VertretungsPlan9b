@@ -14,11 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class plan1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
-    Button baktualisieren12;
+    ImageButton baktualisieren12;
     WebView WebView12;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class plan1Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        baktualisieren12 = (Button) findViewById(R.id.baktualisieren12);
+        baktualisieren12 = (ImageButton) findViewById(R.id.baktualisieren12);
         WebView12 =(WebView)findViewById(R.id.WebView12);
         baktualisieren12.setOnClickListener(this);
         String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
@@ -101,6 +101,8 @@ public class plan1Activity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, plan2Activity.class));
 
+        }else if (id == R.id.nav_view) {
+            startActivity(new Intent(this, haActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

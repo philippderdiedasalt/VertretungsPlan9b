@@ -3,9 +3,8 @@ package tk.neunbbgg.vertretungsplan;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class plan2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    Button baktualisieren22;
+    ImageButton baktualisieren22;
     WebView WebView22;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class plan2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        baktualisieren22 = (Button) findViewById(R.id.baktualisieren22);
+        baktualisieren22 = (ImageButton) findViewById(R.id.baktualisieren22);
         WebView22 =(WebView)findViewById(R.id.WebView22);
         baktualisieren22.setOnClickListener(this);
         String url22 ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
@@ -100,6 +100,8 @@ public class plan2Activity extends AppCompatActivity
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {
         //eigene classe es passiert hier nichrts
+        }else if (id == R.id.nav_view) {
+            startActivity(new Intent(this, haActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

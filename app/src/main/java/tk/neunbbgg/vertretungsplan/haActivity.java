@@ -13,25 +13,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageButton;
 
-public class bilderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-
+public class haActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    WebView wha;
+    ImageButton bka;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bilder);
+        setContentView(R.layout.activity_ha);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        wha = (WebView) findViewById(R.id.wha);
+        String urlka = "http://wji0znhdkmk4m6wr.myfritz.net:8081/";
+        wha.loadUrl(urlka);
+        bka = (ImageButton) findViewById(R.id.bka);
+        bka.setOnClickListener(this);
+        wha.getSettings().setJavaScriptEnabled(true);
+        wha.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Sinnloser Knopf", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -59,7 +66,7 @@ public class bilderActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bilder, menu);
+        getMenuInflater().inflate(R.menu.ha, menu);
         return true;
     }
 
@@ -87,14 +94,15 @@ public class bilderActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             startActivity(new Intent(this, naviActivity.class));
         } else if (id == R.id.nav_gallery) {
-            //nichts
+            startActivity(new Intent(this, bilderActivity.class));
+        } else if (id == R.id.nav_slideshow) {
+            startActivity(new Intent(this,mensaActivity.class));
+        } else if (id == R.id.nav_view) {
+
         } else if (id == R.id.nav_share) {
-            startActivity(new Intent(this, plan1Activity.class));
+            startActivity(new Intent(this,plan1Activity.class));
         } else if (id == R.id.nav_send) {
-            startActivity(new Intent(this, plan2Activity.class));
-        }
-        else if (id == R.id.nav_view) {
-            startActivity(new Intent(this, haActivity.class));
+            startActivity(new Intent(this,plan2Activity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -102,6 +110,13 @@ public class bilderActivity extends AppCompatActivity
         return true;
     }
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bka: {
+                String urlka="http://wji0znhdkmk4m6wr.myfritz.net:8081/";
+                wha.loadUrl(urlka);
+            }
+        }
+    }
 }
-

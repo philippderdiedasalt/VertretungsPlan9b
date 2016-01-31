@@ -71,6 +71,11 @@
             android:name=".mensaActivity"
             android:label="Mensaplan"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".haActivity"
+            android:label="Hausaufgaben"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

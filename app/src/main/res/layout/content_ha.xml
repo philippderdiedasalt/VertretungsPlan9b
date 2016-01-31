@@ -9,24 +9,23 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="tk.neunbbgg.vertretungsplan.plan1Activity"
-    tools:showIn="@layout/app_bar_plan1">
+    tools:context="tk.neunbbgg.vertretungsplan.haActivity"
+    tools:showIn="@layout/app_bar_ha">
 
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/WebView12"
-        android:layout_below="@+id/baktualisieren"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/wha"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_refresh"
-        android:id="@+id/baktualisieren12"
-        android:layout_alignTop="@+id/baktualisieren12"
+        android:id="@+id/bka"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_refresh" />
 
 </RelativeLayout>

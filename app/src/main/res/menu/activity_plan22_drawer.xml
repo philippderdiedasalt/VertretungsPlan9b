@@ -14,6 +14,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_local_dining_black_24dp"
             android:title="Mensaplan"/>
+        <item
+            android:id="@+id/nav_view"
+            android:icon="@drawable/ic_weekend_black_24dp"
+            android:title="Hausaufgaben" />
 
     </group>
 

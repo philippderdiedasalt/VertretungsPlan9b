@@ -14,12 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class mensaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     WebView mensa;
-    Button bmensa;
+    ImageButton bmensa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class mensaActivity extends AppCompatActivity
         mensa = (WebView) findViewById(R.id.mensa);
         String urlm="http://gymglinde.de/typo40/index.php?id=1037";
         mensa.loadUrl(urlm);
-        bmensa = (Button) findViewById(R.id.bmensa);
+        bmensa = (ImageButton) findViewById(R.id.bmensa);
         bmensa.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -99,6 +99,10 @@ public class mensaActivity extends AppCompatActivity
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, plan2Activity.class));
+        }else if (id == R.id.nav_view) {
+            startActivity(new Intent(this, haActivity.class));
+        }else if (id == R.id.nav_view) {
+            startActivity(new Intent(this, haActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
