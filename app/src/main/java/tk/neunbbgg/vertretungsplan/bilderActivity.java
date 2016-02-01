@@ -33,6 +33,7 @@ public class bilderActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://9bgg.tk/"));
+                startActivity(intent);
             }
         });
 

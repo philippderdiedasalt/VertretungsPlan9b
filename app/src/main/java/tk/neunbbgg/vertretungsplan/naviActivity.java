@@ -92,7 +92,8 @@ public class naviActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-
+        System.out.println(text.toString());
+        System.out.println(version);
 
         if ((!text.toString().equals(version))){
 
