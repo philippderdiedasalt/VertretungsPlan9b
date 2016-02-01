@@ -48,6 +48,8 @@ public class termineActivity extends AppCompatActivity
         wt = (WebView) findViewById(R.id.wt);
 
         wt.loadUrl(ut);
+        wt.getSettings().setJavaScriptEnabled(true);
+        wt.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     }
 
     @Override
