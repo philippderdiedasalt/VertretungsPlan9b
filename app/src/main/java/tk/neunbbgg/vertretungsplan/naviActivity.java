@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -44,7 +44,8 @@ import java.util.ArrayList;
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static String file_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/version.txt";
-    Button blogout1, bup;
+    Button blogout1;
+    ImageButton bup;
 
     ImageView pm1;
     CheckBox cb1;
@@ -102,7 +103,7 @@ public class naviActivity extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://9bgg.tk"));
+                            Uri.parse("https://github.com/philippDerDieDas/VertretungsPlan9b/raw/master/app/build/outputs/apk/app-debug.apk"));
                     startActivity(intent);
                     dialog.dismiss();
                 }
@@ -141,8 +142,9 @@ public class naviActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Sinnloser Knopf", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://9bgg.tk/"));
+                startActivity(intent);
             }
         });
 
@@ -155,7 +157,7 @@ public class naviActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         blogout1 = (Button) findViewById(R.id.blogout1);
-        bup = (Button) findViewById(R.id.bup);
+        bup = (ImageButton) findViewById(R.id.bup);
         bup.setOnClickListener(this);
         pm1 = (ImageView) findViewById(R.id.pm1);
         cb1 = (CheckBox) findViewById(R.id.cb1);
