@@ -102,6 +102,8 @@ public class plan2Activity extends AppCompatActivity
         //eigene classe es passiert hier nichrts
         }else if (id == R.id.nav_view) {
             startActivity(new Intent(this, haActivity.class));
+        }else if (id == R.id.nav_k){
+            startActivity(new Intent(this, termineActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

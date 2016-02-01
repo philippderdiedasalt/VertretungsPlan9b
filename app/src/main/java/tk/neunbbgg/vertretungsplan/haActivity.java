@@ -103,6 +103,8 @@ public class haActivity extends AppCompatActivity
             startActivity(new Intent(this,plan1Activity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this,plan2Activity.class));
+        }else if (id == R.id.nav_k){
+            startActivity(new Intent(this, termineActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

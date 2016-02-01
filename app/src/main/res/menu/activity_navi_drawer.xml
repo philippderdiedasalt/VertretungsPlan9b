@@ -18,6 +18,10 @@
             android:id="@+id/nav_view"
             android:icon="@drawable/ic_weekend_black_24dp"
             android:title="Hausaufgaben" />
+        <item
+            android:id="@+id/nav_k"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="Termine"/>
     </group>
 
     <item android:title="Vertretungspläne">

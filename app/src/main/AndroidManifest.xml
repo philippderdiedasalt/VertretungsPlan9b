@@ -76,6 +76,10 @@
             android:name=".haActivity"
             android:label="Hausaufgaben"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".termineActivity"
+            android:label="@string/title_activity_termine"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

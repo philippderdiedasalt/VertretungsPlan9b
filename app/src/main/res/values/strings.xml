@@ -16,4 +16,5 @@
     <string name="title_activity_bilder">bilderActivity</string>
     <string name="title_activity_mensa">mensaActivity</string>
     <string name="title_activity_ha">haActivity</string>
+    <string name="title_activity_termine">termineActivity</string>
 </resources>
