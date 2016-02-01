@@ -47,7 +47,7 @@ public class plan2Activity extends AppCompatActivity
         baktualisieren22 = (ImageButton) findViewById(R.id.baktualisieren22);
         WebView22 =(WebView)findViewById(R.id.WebView22);
         baktualisieren22.setOnClickListener(this);
-        String url22 ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
+        String url22 ="file:///sdcard/morgen.htm";
         WebView22.loadUrl(url22);
     }
 
@@ -118,7 +118,7 @@ public class plan2Activity extends AppCompatActivity
 
 
 
-                String url22 ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
+                String url22 ="file:///sdcard/morgen.htm";
                 WebView22.loadUrl(url22);
 
 

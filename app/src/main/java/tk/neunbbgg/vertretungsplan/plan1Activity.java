@@ -20,6 +20,7 @@ public class plan1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     ImageButton baktualisieren12;
     WebView WebView12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class plan1Activity extends AppCompatActivity
         baktualisieren12 = (ImageButton) findViewById(R.id.baktualisieren12);
         WebView12 =(WebView)findViewById(R.id.WebView12);
         baktualisieren12.setOnClickListener(this);
-        String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
+        String url ="file:///sdcard/heute.htm";
         WebView12.loadUrl(url);
     }
 
@@ -118,8 +119,7 @@ public class plan1Activity extends AppCompatActivity
             case R.id.baktualisieren12:
 
 
-
-                String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
+                String url ="file:///sdcard/heute.htm";
                 WebView12.loadUrl(url);
 
 
