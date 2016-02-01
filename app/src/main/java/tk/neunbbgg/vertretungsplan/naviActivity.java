@@ -27,8 +27,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +37,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -52,9 +49,7 @@ public class naviActivity extends AppCompatActivity
     public static final String DEFAULT="N/A";
     public String path = "/variables";
     public String version;
-    InputStream is;
-    ArrayList<String> results = new ArrayList<String>();
-    JSONObject json_data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +68,7 @@ public class naviActivity extends AppCompatActivity
         StringBuilder text = new StringBuilder();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new FileReader("/sdcard/version.txt"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -84,6 +79,7 @@ public class naviActivity extends AppCompatActivity
         }
         catch (IOException e) {
             //You'll need to add proper error handling here
+            System.out.println("FEHLER VERSION:TXT="+text.toString());
         }
 
         try {
@@ -306,6 +302,7 @@ class DownloadFileFromURLVersion extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
+
             OutputStream output = new FileOutputStream("/sdcard/version.txt");
 
             byte data[] = new byte[1024];
