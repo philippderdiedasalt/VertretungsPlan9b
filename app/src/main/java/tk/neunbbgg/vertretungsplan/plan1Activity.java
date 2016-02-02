@@ -3,6 +3,7 @@ package tk.neunbbgg.vertretungsplan;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -50,8 +51,7 @@ public class plan1Activity extends AppCompatActivity
         baktualisieren12 = (ImageButton) findViewById(R.id.baktualisieren12);
         WebView12 =(WebView)findViewById(R.id.WebView12);
         baktualisieren12.setOnClickListener(this);
-        String url ="file:///sdcard/heute.htm";
-        WebView12.loadUrl(url);
+        WebView12.loadUrl("File://" + Environment.getExternalStorageDirectory()+"/heute.htm");
     }
 
     @Override

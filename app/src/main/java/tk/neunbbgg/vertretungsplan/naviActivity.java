@@ -34,7 +34,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -62,13 +61,13 @@ public class naviActivity extends AppCompatActivity
         File sdcard = Environment.getExternalStorageDirectory();
 
 //Get the text file
-        File file = new File(sdcard,"version.txt");
+
 
 //Read text from file
         StringBuilder text = new StringBuilder();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/sdcard/version.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(sdcard.getPath()+"/version.txt"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -78,7 +77,8 @@ public class naviActivity extends AppCompatActivity
             br.close();
         }
         catch (IOException e) {
-            //You'll need to add proper error handling here
+            //You'll need to add proper error
+            // handling here
             System.out.println("FEHLER VERSION:TXT="+text.toString());
         }
 
@@ -90,7 +90,9 @@ public class naviActivity extends AppCompatActivity
 
         System.out.println(text.toString());
         System.out.println(version);
-
+        System.out.println(Environment.getExternalStorageDirectory());
+        System.out.println(Environment.getExternalStorageDirectory().getPath());
+        System.out.println(Environment.getExternalStorageDirectory().getPath()+"/version.txt");
         if ((!text.toString().equals(version))){
 
             AlertDialog ad3 = new AlertDialog.Builder(this).create();
@@ -303,7 +305,7 @@ class DownloadFileFromURLVersion extends AsyncTask<String, String, String> {
 
             // Output stream to write file
 
-            OutputStream output = new FileOutputStream("/sdcard/version.txt");
+            FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/version.txt");
 
             byte data[] = new byte[1024];
 

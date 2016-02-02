@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -86,7 +87,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
             if (etUsername.getText().toString().equals("9b")){
 
                 if (etPassword.getText().toString().equals("9berta")){
-                    startActivity(new Intent(this, Menu.class));
+                    startActivity(new Intent(this, naviActivity.class));
                     break;
                 }
 
@@ -172,7 +173,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream("/sdcard/heute.htm");
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/heute.htm");
 
             byte data[] = new byte[1024];
 
@@ -229,7 +230,7 @@ class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream("/sdcard/morgen.htm");
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/morgen.htm");
 
             byte data[] = new byte[1024];
 
