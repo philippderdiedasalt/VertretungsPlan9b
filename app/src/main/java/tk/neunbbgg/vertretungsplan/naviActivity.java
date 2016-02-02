@@ -93,7 +93,7 @@ public class naviActivity extends AppCompatActivity
 
             AlertDialog ad3 = new AlertDialog.Builder(this).create();
             ad3.setCancelable(false); // This blocks the 'BACK' button
-            ad3.setMessage("Update Verfügbar");
+            ad3.setMessage("Update Verfügbar: Ver.: "+text.toString());
             ad3.setButton("Holen!", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -244,6 +244,7 @@ public class naviActivity extends AppCompatActivity
                 break;
             case R.id.bup:
                int a = 1;
+                new DownloadFileFromURLVersion().execute(file_url);
                 startActivity(new Intent(this, naviActivity.class));
                 break;
         }
