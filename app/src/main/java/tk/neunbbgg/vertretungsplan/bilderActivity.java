@@ -13,11 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 public class bilderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
-
+    ImageView g;
+    public static int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class bilderActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        g = (ImageView) findViewById(R.id.g);
+        g.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,5 +113,18 @@ public class bilderActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.g:
+                if (i==22){
+                startActivity(new Intent(this, davidActivity.class));
+                }
+                i=i+1;
+
+
+                break;
+        }
+    }
 }
 

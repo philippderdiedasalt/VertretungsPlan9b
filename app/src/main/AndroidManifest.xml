@@ -79,6 +79,10 @@
             android:name=".termineActivity"
             android:label="Termine"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".davidActivity"
+            android:label="@string/title_activity_david"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
