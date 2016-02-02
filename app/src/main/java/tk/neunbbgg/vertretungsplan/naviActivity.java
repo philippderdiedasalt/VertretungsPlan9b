@@ -39,7 +39,7 @@ import java.net.URLConnection;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    private static String file_url = "https://raw.githubusercontent.com/philippDerDieDas/VertretungsPlan9b/master/versioninfo.txt";
+    private static String file_url = "https://dl.dropboxusercontent.com/u/270150900/version.txt";
     Button blogout1;
     ImageButton bup;
 
