@@ -118,7 +118,7 @@ public class bilderActivity extends AppCompatActivity
         switch (v.getId()){
             case R.id.g:
                 if (i==22){
-                startActivity(new Intent(this, davidActivity.class));
+                i=0;
                 }
                 i=i+1;
 

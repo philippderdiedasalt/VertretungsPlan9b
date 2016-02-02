@@ -80,11 +80,6 @@
             android:label="Termine"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".davidActivity"
-            android:screenOrientation="portrait"
-            android:label="David ist stolz"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
