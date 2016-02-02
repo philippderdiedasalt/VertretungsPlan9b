@@ -27,7 +27,7 @@ public class haActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         wha = (WebView) findViewById(R.id.wha);
-        String urlka = "http://wji0znhdkmk4m6wr.myfritz.net:8081/";
+        String urlka = "https://dl.dropboxusercontent.com/u/270150900/ha.html";
         wha.loadUrl(urlka);
         bka = (ImageButton) findViewById(R.id.bka);
         bka.setOnClickListener(this);

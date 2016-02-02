@@ -39,7 +39,7 @@ import java.net.URLConnection;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    private static String file_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/version.txt";
+    private static String file_url = "https://raw.githubusercontent.com/philippDerDieDas/VertretungsPlan9b/master/versioninfo.txt";
     Button blogout1;
     ImageButton bup;
 
@@ -106,6 +106,7 @@ public class naviActivity extends AppCompatActivity
             ad3.show();
 
         }
+
 //Find the view by its id
 
 
@@ -242,6 +243,7 @@ public class naviActivity extends AppCompatActivity
 
                 break;
             case R.id.bup:
+               int a = 1;
                 startActivity(new Intent(this, naviActivity.class));
                 break;
         }

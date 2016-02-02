@@ -20,7 +20,7 @@ public class termineActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     ImageButton brt;
     WebView wt;
-    String ut= "http://wji0znhdkmk4m6wr.myfritz.net:8081/index2.html";
+    String ut= "https://dl.dropboxusercontent.com/u/270150900/ter.html";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
