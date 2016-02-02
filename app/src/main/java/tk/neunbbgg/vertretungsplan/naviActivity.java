@@ -88,12 +88,8 @@ public class naviActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        System.out.println(text.toString());
-        System.out.println(version);
-        System.out.println(Environment.getExternalStorageDirectory());
-        System.out.println(Environment.getExternalStorageDirectory().getPath());
-        System.out.println(Environment.getExternalStorageDirectory().getPath()+"/version.txt");
-        if ((!text.toString().equals(version))){
+
+        if ((!text.toString().equals(MainActivity.appversion))){
 
             AlertDialog ad3 = new AlertDialog.Builder(this).create();
             ad3.setCancelable(false); // This blocks the 'BACK' button
