@@ -120,8 +120,10 @@ public class plan2Activity extends AppCompatActivity
 
 
 
-                String url22 ="file:///sdcard/morgen.htm";
-                WebView22.loadUrl(url22);
+                String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
+                new DownloadFileFromURL().execute(url);
+
+                WebView22.loadUrl("file:///sdcard/morgen.htm");
 
 
                 break;

@@ -117,7 +117,7 @@ public class haActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bka: {
-                String urlka="http://wji0znhdkmk4m6wr.myfritz.net:8081/";
+                String urlka="https://dl.dropboxusercontent.com/u/270150900/ha.html";
                 wha.loadUrl(urlka);
             }
         }

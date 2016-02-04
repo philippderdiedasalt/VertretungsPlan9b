@@ -118,10 +118,10 @@ public class plan1Activity extends AppCompatActivity
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.baktualisieren12:
+                String url ="http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
+                new DownloadFileFromURL().execute(url);
 
-
-                String url ="file:///sdcard/heute.htm";
-                WebView12.loadUrl(url);
+                WebView12.loadUrl("file:///sdcard/heute.htm");
 
 
                 break;

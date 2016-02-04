@@ -208,14 +208,6 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
 }
 class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
 
-    /**
-     * Before starting background thread
-     * Show Progress Bar Dialog
-     * */
-
-    /**
-     * Downloading file in background thread
-     * */
     @Override
     protected String doInBackground(String... f_url) {
         int count;

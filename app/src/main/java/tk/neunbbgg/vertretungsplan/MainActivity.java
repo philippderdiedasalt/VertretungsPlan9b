@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 
 public class MainActivity extends ActionBarActivity{
 
-    public static String appversion="3.5";
+    public static String appversion="3.6";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
