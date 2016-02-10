@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -82,11 +81,7 @@ public class naviActivity extends AppCompatActivity
             System.out.println("FEHLER VERSION:TXT="+text.toString());
         }
 
-        try {
-             version = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
 
         if ((!text.toString().equals(MainActivity.appversion))){

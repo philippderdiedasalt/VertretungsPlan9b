@@ -18,4 +18,5 @@
     <string name="title_activity_ha">haActivity</string>
     <string name="title_activity_termine">termineActivity</string>
     <string name="title_activity_david">davidActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 </resources>
