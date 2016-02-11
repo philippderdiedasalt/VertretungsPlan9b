@@ -9,7 +9,7 @@ import android.widget.ImageView;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     ImageView easter;
     Integer x = 0;
-    public static String appversion="3.8";
+    public static String appversion="3.8.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +29,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.easter:
+
                 x = x+1;
-                if (x==10){
-                    new Intent(this, easterActivity.class);
+                if (x>10){
+                   startActivity( new Intent(this, easterActivity.class));
                 }
                 break;
         }
