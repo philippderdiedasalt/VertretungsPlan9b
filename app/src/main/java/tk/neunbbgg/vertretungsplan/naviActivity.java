@@ -88,13 +88,20 @@ public class naviActivity extends AppCompatActivity
 
             AlertDialog ad3 = new AlertDialog.Builder(this).create();
             ad3.setCancelable(false); // This blocks the 'BACK' button
-            ad3.setMessage("Update Verfügbar: Ver.: "+text.toString());
+            ad3.setMessage("Update Verfügbar: Ver.: " + text.toString());
             ad3.setButton("Holen!", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse("https://github.com/philippDerDieDas/VertretungsPlan9b/raw/master/app/build/outputs/apk/app-debug.apk"));
                     startActivity(intent);
+                    dialog.dismiss();
+                }
+            });
+            ad3.setButton2("Abbrechen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
                     dialog.dismiss();
                 }
             });
