@@ -30,8 +30,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.easter:
                 x = x+1;
-                if (x==5){
-
+                if (x==10){
+                    new Intent(this, easterActivity.class);
                 }
                 break;
         }
