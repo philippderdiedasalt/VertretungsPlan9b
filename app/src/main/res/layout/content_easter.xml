@@ -13,23 +13,5 @@
     >
 
 
-    <ViewFlipper
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/viewFlipper"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/jonaspoke" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
-            android:src="@drawable/davidpoke" />
-    </ViewFlipper>
 </RelativeLayout>

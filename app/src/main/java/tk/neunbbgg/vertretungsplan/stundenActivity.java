@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ import java.net.URLConnection;
 
 public class stundenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static String file_url = "https://dl.dropboxusercontent.com/u/270150900/stunden.html";
+    public static String file_stunden_url = "https://dl.dropboxusercontent.com/u/270150900/stunden.html";
     WebView wstunden;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class stundenActivity extends AppCompatActivity
         setContentView(R.layout.activity_stunden);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        new DownloadFileFromURLS().execute(file_url);
+        new DownloadFileFromURLS().execute(file_stunden_url);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,12 @@ public class stundenActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_aktu){
+            new DownloadFileFromURL().execute(Login.file_heute_url);
+            new DownloadFileFromURL().execute(Login.file_morgen_url);
+            new DownloadFileFromURLVersion().execute(naviActivity.file_version_url);
+            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
+            Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

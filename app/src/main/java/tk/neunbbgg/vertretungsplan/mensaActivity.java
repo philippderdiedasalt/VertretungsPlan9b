@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class mensaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -79,6 +80,12 @@ public class mensaActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_aktu){
+            new DownloadFileFromURL().execute(Login.file_heute_url);
+            new DownloadFileFromURL().execute(Login.file_morgen_url);
+            new DownloadFileFromURLVersion().execute(naviActivity.file_version_url);
+            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
+            Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

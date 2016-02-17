@@ -30,8 +30,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     EditText etUsername;
     EditText etPassword;
     ImageView pl;
-    private static String file_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
-    private static String file_url2 = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
+    public static String file_heute_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
+    public static String file_morgen_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
     public static final String PREFS_NAME = "MyPrefsFile";
 
 
@@ -43,8 +43,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
 
-        new DownloadFileFromURL().execute(file_url);
-        new DownloadFileFromURL2().execute(file_url2);
+        new DownloadFileFromURL().execute(file_heute_url);
+        new DownloadFileFromURL2().execute(file_morgen_url);
 
 
 

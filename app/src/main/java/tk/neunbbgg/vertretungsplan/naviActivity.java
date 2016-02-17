@@ -38,7 +38,7 @@ import java.net.URLConnection;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    private static String file_url = "https://dl.dropboxusercontent.com/u/270150900/version.txt";
+    public static String file_version_url = "https://dl.dropboxusercontent.com/u/270150900/version.txt";
     Button blogout1;
     ImageButton bup;
 
@@ -55,7 +55,7 @@ public class naviActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new DownloadFileFromURLVersion().execute(file_url);
+        new DownloadFileFromURLVersion().execute(file_version_url);
 
         File sdcard = Environment.getExternalStorageDirectory();
 
@@ -197,6 +197,12 @@ public class naviActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_aktu){
+            new DownloadFileFromURL().execute(Login.file_heute_url);
+            new DownloadFileFromURL().execute(Login.file_morgen_url);
+            new DownloadFileFromURLVersion().execute(naviActivity.file_version_url);
+            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
+            Toast.makeText(getApplicationContext() , "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -248,7 +254,7 @@ public class naviActivity extends AppCompatActivity
                 break;
             case R.id.bup:
                int a = 1;
-                new DownloadFileFromURLVersion().execute(file_url);
+                new DownloadFileFromURLVersion().execute(file_version_url);
                 startActivity(new Intent(this, naviActivity.class));
                 break;
         }
