@@ -145,7 +145,7 @@ class DownloadFileFromURLS extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/stunden.htm");
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/stunden.html");
 
             byte data[] = new byte[1024];
 
