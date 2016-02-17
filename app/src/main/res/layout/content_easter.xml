@@ -9,37 +9,27 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="tk.neunbbgg.vertretungsplan.bilderActivity"
-    tools:showIn="@layout/app_bar_bilder">
+    tools:context="tk.neunbbgg.vertretungsplan.easterActivity"
+    >
 
 
-
-
+    <ViewFlipper
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/viewFlipper"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
-            android:src="@drawable/davidpoke" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
+            android:id="@+id/imageView2"
             android:src="@drawable/jonaspoke" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
-            android:src="@drawable/jasonpoke" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
-            android:src="@drawable/robertpoke" />
-
-
+            android:id="@+id/imageView3"
+            android:src="@drawable/davidpoke" />
+    </ViewFlipper>
 </RelativeLayout>
