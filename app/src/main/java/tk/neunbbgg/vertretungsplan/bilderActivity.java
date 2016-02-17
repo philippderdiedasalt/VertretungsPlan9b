@@ -105,6 +105,8 @@ public class bilderActivity extends AppCompatActivity
         }else if (id == R.id.nav_slideshow){
             startActivity(new Intent(this, mensaActivity.class));
 
+        }else if (id == R.id.stundenplan){
+            startActivity(new Intent(this, stundenActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -106,6 +106,8 @@ public class mensaActivity extends AppCompatActivity
             startActivity(new Intent(this, haActivity.class));
         }else if (id == R.id.nav_k){
             startActivity(new Intent(this, termineActivity.class));
+        }else if (id == R.id.stundenplan){
+            startActivity(new Intent(this, stundenActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

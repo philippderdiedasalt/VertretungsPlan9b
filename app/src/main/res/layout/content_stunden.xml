@@ -9,25 +9,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="tk.neunbbgg.vertretungsplan.bilderActivity"
-    tools:showIn="@layout/app_bar_bilder">
+    tools:context="tk.neunbbgg.vertretungsplan.stundenActivity"
+    tools:showIn="@layout/app_bar_stunden">
 
-
-
-    <ScrollView
+    <WebView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollView"
+        android:id="@+id/wstunden"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/g"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/davidpoke" />
-    </ScrollView>
-
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

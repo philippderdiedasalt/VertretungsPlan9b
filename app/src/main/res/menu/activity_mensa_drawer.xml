@@ -25,8 +25,12 @@
 
     </group>
 
-    <item android:title="Vetretungspläne">
+    <item android:title="Vertretungspläne">
         <menu>
+            <item
+                android:id="@+id/stundenplan"
+                android:icon="@drawable/ic_event_black_24dp"
+                android:title="Stundenplan"/>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_subject_black_24dp"

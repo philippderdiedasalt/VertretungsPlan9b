@@ -17,7 +17,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,23 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Plan1"
-            android:label="@string/title_activity_plan1"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Menu"
-            android:label="@string/title_activity_menu"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Plan2"
-            android:label="@string/title_activity_plan2"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -86,15 +70,14 @@
             android:label="Einstellungen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".easterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-
-            >
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".stundenActivity"
+            android:label="@string/title_activity_stunden"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

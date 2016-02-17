@@ -2,9 +2,13 @@ package tk.neunbbgg.vertretungsplan;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,21 +17,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageButton;
 
-public class plan2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    ImageButton baktualisieren22;
-    WebView WebView22;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class stundenActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    private static String file_url = "https://dl.dropboxusercontent.com/u/270150900/stunden.html";
+    WebView wstunden;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plan22);
+        setContentView(R.layout.activity_stunden);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        new DownloadFileFromURLS().execute(file_url);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +52,10 @@ public class plan2Activity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        wstunden = (WebView) findViewById(R.id.wstunden);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        baktualisieren22 = (ImageButton) findViewById(R.id.baktualisieren22);
-        WebView22 =(WebView)findViewById(R.id.WebView22);
-        baktualisieren22.setOnClickListener(this);
-        String url22 ="file://"+ Environment.getExternalStorageDirectory()+"/morgen.htm";
-        WebView22.loadUrl(url22);
+        wstunden.loadUrl("file:///sdcard/stunden.html");
     }
 
     @Override
@@ -66,7 +71,7 @@ public class plan2Activity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.plan2, menu);
+        getMenuInflater().inflate(R.menu.stunden, menu);
         return true;
     }
 
@@ -101,34 +106,75 @@ public class plan2Activity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {
-        //eigene classe es passiert hier nichrts
+            startActivity(new Intent(this, plan2Activity.class));
         }else if (id == R.id.nav_view) {
             startActivity(new Intent(this, haActivity.class));
         }else if (id == R.id.nav_k){
             startActivity(new Intent(this, termineActivity.class));
         }else if (id == R.id.stundenplan){
-            startActivity(new Intent(this, stundenActivity.class));
+            // nichts
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+}
+class DownloadFileFromURLS extends AsyncTask<String, String, String> {
 
+
+    /**
+     * Before starting background thread
+     * Show Progress Bar Dialog
+     * */
+
+    /**
+     * Downloading file in background thread
+     * */
     @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.baktualisieren22:
+    protected String doInBackground(String... f_url) {
+        int count;
+        try {
+            URL url = new URL(f_url[0]);
+            URLConnection conection = url.openConnection();
+            conection.connect();
+            // getting file length
+            int lenghtOfFile = conection.getContentLength();
 
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
+            // Output stream to write file
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/stunden.htm");
 
-                String url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
-                new DownloadFileFromURL().execute(url);
+            byte data[] = new byte[1024];
 
-                WebView22.loadUrl("file:///sdcard/morgen.htm");
+            long total = 0;
 
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                // publishing the progress....
+                // After this onProgressUpdate will be called
+                publishProgress(""+(int)((total*100)/lenghtOfFile));
 
-                break;
+                // writing data to file
+                output.write(data, 0, count);
+            }
+
+            // flushing output
+            output.flush();
+
+            // closing streams
+            output.close();
+            input.close();
+
+        } catch (Exception e) {
+            Log.e("Error: ", e.getMessage());
         }
+
+        return null;
     }
+
+
+
 }
