@@ -12,23 +12,45 @@
     tools:context="tk.neunbbgg.vertretungsplan.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/red_circle"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tfarbe"
+        android:layout_toEndOf="@+id/tfarbe"
+        android:layout_marginLeft="10dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Farbe ändern"
+        android:text="Farbe ändern:"
         android:id="@+id/tfarbe"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/imageView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="30dp" />
+        android:textSize="40dp" />
 
-    <ImageButton
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/iback"
-        android:src="@drawable/ic_arrow_back_black_24dp"
-        android:layout_marginBottom="60dp"
-        android:layout_alignParentBottom="true"
+        android:text="Nachtmodus:"
+        android:id="@+id/textView3"
+        android:textSize="40dp"
+        android:layout_below="@+id/tfarbe"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch1"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:checked="false"
+        android:layout_alignParentEnd="false" />
+
 </RelativeLayout>

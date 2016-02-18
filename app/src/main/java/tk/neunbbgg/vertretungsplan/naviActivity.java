@@ -1,5 +1,6 @@
 package tk.neunbbgg.vertretungsplan;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -54,6 +56,13 @@ public class naviActivity extends AppCompatActivity
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences sharedPreferences1=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+
+        String nacht = sharedPreferences1.getString("nacht", DEFAULT);
+//        RelativeLayout activity = (RelativeLayout) findViewById(R.id.drawer_layout_navi);
+        if (nacht=="1"){
+           // activity.setBackgroundColor(8);
+        }
 
         new DownloadFileFromURLVersion().execute(file_version_url);
 
@@ -146,7 +155,7 @@ public class naviActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_navi);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -172,7 +181,7 @@ public class naviActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_navi);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -196,7 +205,7 @@ public class naviActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.action_aktu){
             new DownloadFileFromURL().execute(Login.file_heute_url);
             new DownloadFileFromURL().execute(Login.file_morgen_url);
@@ -232,7 +241,7 @@ public class naviActivity extends AppCompatActivity
             startActivity(new Intent(this, stundenActivity.class));
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_navi);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
