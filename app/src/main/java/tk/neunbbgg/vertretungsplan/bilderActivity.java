@@ -16,8 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class bilderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
+public class bilderActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     ImageView g;
     public static int i = 0;
@@ -115,6 +114,8 @@ public class bilderActivity extends AppCompatActivity
 
         }else if (id == R.id.stundenplan){
             startActivity(new Intent(this, stundenActivity.class));
+        }else if (id == R.id.telefon){
+            startActivity(new Intent(this, telefonActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_bild);

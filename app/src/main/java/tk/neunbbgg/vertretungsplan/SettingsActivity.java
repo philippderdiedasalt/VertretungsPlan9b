@@ -139,11 +139,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
 
             case R.id.bkontakt:
-                Intent intent1 = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "philippharms1@web.de", null));
+                Intent intent1 = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "9b.gymglinde@gmail.com", null));
                 startActivity(Intent.createChooser(intent1, "Email senden"));
                 break;
             case R.id.ibkontakt:
-                Intent intent2 = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "philippharms1@web.de", null));
+                Intent intent2 = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "9b.gymglinde@gmail.com", null));
                 startActivity(Intent.createChooser(intent2, "Email senden"));
                 break;
         }

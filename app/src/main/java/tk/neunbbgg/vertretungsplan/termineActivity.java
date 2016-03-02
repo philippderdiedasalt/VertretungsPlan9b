@@ -111,13 +111,15 @@ public class termineActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, plan1Activity.class));
         } else if (id == R.id.nav_send) {
-            //eigene classe es passiert hier nichrts
+
         }else if (id == R.id.nav_view) {
             startActivity(new Intent(this, haActivity.class));
         }else if (id == R.id.nav_k){
 
         }else if (id == R.id.stundenplan){
             startActivity(new Intent(this, stundenActivity.class));
+        }else if (id == R.id.telefon){
+            startActivity(new Intent(this, telefonActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_termine);

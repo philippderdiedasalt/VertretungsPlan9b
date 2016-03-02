@@ -33,6 +33,8 @@ public class mensaActivity extends AppCompatActivity
         bmensa = (ImageButton) findViewById(R.id.bmensa);
         bmensa.setOnClickListener(this);
 
+        mensa.getSettings().setSupportZoom(true);
+        mensa.getSettings().setBuiltInZoomControls(true);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +117,8 @@ public class mensaActivity extends AppCompatActivity
             startActivity(new Intent(this, termineActivity.class));
         }else if (id == R.id.stundenplan){
             startActivity(new Intent(this, stundenActivity.class));
+        }else if (id == R.id.telefon){
+            startActivity(new Intent(this, telefonActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_mensa);

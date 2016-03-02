@@ -120,6 +120,8 @@ public class stundenActivity extends AppCompatActivity
             startActivity(new Intent(this, termineActivity.class));
         }else if (id == R.id.stundenplan){
             // nichts
+        }else if (id == R.id.telefon){
+            startActivity(new Intent(this, telefonActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_stunden);
