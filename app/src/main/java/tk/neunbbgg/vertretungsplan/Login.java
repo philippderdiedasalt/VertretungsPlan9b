@@ -1,66 +1,91 @@
 package tk.neunbbgg.vertretungsplan;
 
 import android.app.AlertDialog;
+import android.app.admin.DeviceAdminInfo;
+import android.app.admin.DevicePolicyManager;
+import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
+import java.security.Security;
+
+import static java.security.AccessController.getContext;
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
-    public static final String DEFAULT="N/A";
-    Button bLogin;
-    EditText etUsername;
-    EditText etPassword;
+    public static final String DEFAULT = "N/A";
+    Button bLogin, bvergessen;
+    EditText etUsername, etPassword;
+    CheckBox cbspeichern;
     ImageView pl;
+    public static String serverip = "login.9bgg.tk";
     public static String file_heute_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
     public static String file_morgen_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
-    public static final String PREFS_NAME = "MyPrefsFile";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+
+        String registred = sharedPreferences.getString("isregistred", "0");
+
+        String username = sharedPreferences.getString("usernamelogin", null);
+
+        String password = sharedPreferences.getString("passwordlogin", null);
+
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
+
+        Boolean loginsave = sharedPreferences.getBoolean("logindata", false);
+
+        cbspeichern = (CheckBox) findViewById(R.id.cbspeichern);
+
+
+        cbspeichern.setChecked(loginsave);
+
 
         new DownloadFileFromURL().execute(file_heute_url);
         new DownloadFileFromURL2().execute(file_morgen_url);
-
-
-
-
-
-        if (autologin.equals("1")){
-
-            startActivity(new Intent(this,naviActivity.class));
-        }
-
-
-
-
-
-
-
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -68,40 +93,91 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         pl = (ImageView) findViewById(R.id.pl);
         pl.setOnClickListener(this);
         bLogin.setOnClickListener(this);
+        bvergessen = (Button) findViewById(R.id.bvergessen);
+        bvergessen.setOnClickListener(this);
 
 
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        etUsername.setText(username);
+        etPassword.setText(password);
+
+        if (autologin.equals("1")) {
+            if (mWifi.isConnected()) {
+                if (username !=null) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            auth();
+                        }
+                    });
+                    auth();
+                }
+            } else {
+                if (registred.equals("1")) {
+                    startActivity(new Intent(this, naviActivity.class));
+                } else {
+                    AlertDialog ad = new AlertDialog.Builder(this).create();
+                    ad.setCancelable(false); // This blocks the 'BACK' button
+                    ad.setMessage("Du bist nicht Registriert!");
+                    ad.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+                }
+            }
+        }
 
 
+    }
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
 
+        // Check which checkbox was clicked
+        switch (view.getId()) {
+            case R.id.cbspeichern:
+                if (checked){
+                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("usernamelogin", etUsername.getText().toString());
+                    editor.putString("passwordlogin", etPassword.getText().toString());
+                    editor.putBoolean("logindata", true);
+                    editor.commit();
 
+                    Toast.makeText(this, "Gespeichert!", Toast.LENGTH_LONG).show();
+                }
+                // Put some meat on the sandwich
+                else{
+                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("usernamelogin", null);
+                    editor.putString("passwordlogin", null);
+                    editor.putBoolean("logindata", false);
+                    editor.commit();
 
-}
+                    Toast.makeText(this,"Gespeichert!",Toast.LENGTH_LONG).show();
+                }
+                // Remove the meat
+                break;
 
-
+        }
+    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bLogin:
 
-            if (etUsername.getText().toString().equals("9b")){
-
-                if (etPassword.getText().toString().equals("9berta")){
-                    startActivity(new Intent(this, naviActivity.class));
-                    break;
-                }
-
-            }
-                AlertDialog ad = new AlertDialog.Builder(this).create();
-                ad.setCancelable(false); // This blocks the 'BACK' button
-                ad.setMessage("Benutzername oder Passwort falsch");
-                ad.setButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                new Thread(new Runnable() {
+                    public void run() {
+                        auth();
                     }
-                });
-                ad.show();
+                }).start();
 
 
                 break;
@@ -112,41 +188,187 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
                 break;
 
+
         }
     }
 
+    void auth() {
+        if (etUsername.getText().toString().isEmpty()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog ad = new AlertDialog.Builder(Login.this).create();
+                    ad.setCancelable(false); // This blocks the 'BACK' button
+                    ad.setMessage("Kein Benutzer eingetippt!");
+                    ad.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+                }
+            });
 
-    void downloadFromUrl(URL url, String localFilename) throws IOException {
-        InputStream is = null;
-        FileOutputStream fos = null;
+        }
+        if (etPassword.getText().toString().isEmpty()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog ad = new AlertDialog.Builder(Login.this).create();
+                    ad.setCancelable(false); // This blocks the 'BACK' button
+                    ad.setMessage("Kein Passwort eingetippt!");
+                    ad.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+                }
+            });
 
-        try {
-            URLConnection urlConn = url.openConnection();//connect
+        }
+        if (!(etUsername.getText().toString().isEmpty() || (etPassword.getText().toString().isEmpty()))) {
 
-            is = urlConn.getInputStream();               //get connection inputstream
-            fos = new FileOutputStream(localFilename);   //open outputstream to local file
-
-            byte[] buffer = new byte[4096];              //declare 4KB buffer
-            int len;
-
-            //while we have availble data, continue downloading and storing to local file
-            while ((len = is.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
-            }
-        } finally {
             try {
-                if (is != null) {
-                    is.close();
+                Socket socket = new Socket(InetAddress.getByName(serverip), 8099);
+                JSONObject jauth = new JSONObject();
+                JSONObject data = new JSONObject();
+                try {
+                    jauth.put("command", "auth");
+                    data.put("username", etUsername.getText().toString());
+                    data.put("password", etPassword.getText().toString());
+                    jauth.put("data", data);
+                    jauth.toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } finally {
-                if (fos != null) {
-                    fos.close();
+
+
+                PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+
+                pw.println(jauth);
+                pw.flush();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                String message = br.readLine();
+                System.out.println(message);
+                pw.close();
+                if (message.equals("true")) {
+                    if (isregistred()) {
+                        startActivity(new Intent(this, naviActivity.class));
+                    }
+                    else if (!isregistred()) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("isRegistred", "1");
+                        editor.commit();
+                        System.out.println("AndroidId: " + Settings.Secure.getString(this.getContentResolver(),
+                                Settings.Secure.ANDROID_ID));
+                        register(etUsername.getText().toString(), Settings.Secure.getString(this.getContentResolver(),
+                                Settings.Secure.ANDROID_ID));
+                        startActivity(new Intent(this, naviActivity.class));
+                    }
+                }
+                else if (message.equals("false")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog ad = new AlertDialog.Builder(Login.this).create();
+                            ad.setCancelable(false); // This blocks the 'BACK' button
+                            ad.setMessage("Benutzername oder Passwort falsch!");
+                            ad.setButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            ad.show();
+
+                        }
+
+                    });
                 }
             }
+
+            catch(UnknownHostException e){
+                e.printStackTrace();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+
+            }
+
+
+        }
+    }
+
+    private void register(String etUsername, String androidId) {
+        try {
+            Socket socket = new Socket(InetAddress.getByName(serverip), 8099);
+
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+
+            JSONObject jregister = new JSONObject();
+            JSONObject data = new JSONObject();
+
+            jregister.put("command", "registerid");
+            data.put("username", etUsername);
+            data.put("androidid", androidId);
+            jregister.put("data", data);
+            jregister.toString();
+            System.out.println(androidId);
+            pw.println(jregister);
+            pw.flush();
+            pw.close();
+
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
     }
 
 
+    private boolean isregistred() {
+        Socket socket = null;
+        boolean b = false;
+        try {
+            socket = new Socket(InetAddress.getByName(serverip), 8099);
+            PrintWriter pw1 = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+
+            JSONObject jregistred = new JSONObject();
+            JSONObject rdata = new JSONObject();
+
+            jregistred.put("command", "isRegistred");
+
+            rdata.put("username", etUsername.getText().toString());
+            rdata.put("device_id", Settings.Secure.ANDROID_ID);
+            System.out.println(Settings.Secure.ANDROID_ID);
+
+            jregistred.put("data", rdata);
+            jregistred.toString();
+
+            pw1.println(jregistred);
+            pw1.flush();
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            String message;
+            message = br.readLine();
+            if (message.equals("registed")){
+                b = true;
+            }
+            else if (message.equals("notregistred")){
+                b = false;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
 }
 class DownloadFileFromURL extends AsyncTask<String, String, String> {
 

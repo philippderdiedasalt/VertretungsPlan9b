@@ -16,7 +16,7 @@
         android:layout_height="40dp" />
     <TextView
         android:layout_width="wrap_content"
-        android:text="Benutzername"
+        android:text="Benutzername oder Id"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/etUsername"
@@ -33,11 +33,27 @@
         android:layout_marginBottom="10dp"
         android:inputType="textPassword"
         android:layout_width="match_parent" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anmeldedaten speichern"
+        android:id="@+id/cbspeichern"
+        android:onClick="onCheckboxClicked"
+        android:checked="false" />
+
     <Button
         android:id="@+id/bLogin"
         android:text="Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Passwort vergessen"
+        android:id="@+id/bvergessen"
+        />
 
     <ImageView
         android:layout_marginTop="10dp"
