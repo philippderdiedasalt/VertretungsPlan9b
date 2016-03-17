@@ -56,7 +56,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     CheckBox cbspeichern;
     ImageView pl;
-    public static String serverip = "93.192.215.39";
+    public static String serverip = "93.192.214.189";
     public static String file_heute_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
     public static String file_morgen_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
 
