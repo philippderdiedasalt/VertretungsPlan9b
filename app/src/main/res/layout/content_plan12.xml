@@ -11,9 +11,7 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/WebView12"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/WebView12" />
 
     <ImageButton
         android:layout_width="wrap_content"

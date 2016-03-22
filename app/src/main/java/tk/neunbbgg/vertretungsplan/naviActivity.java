@@ -1,6 +1,5 @@
 package tk.neunbbgg.vertretungsplan;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,7 +24,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -60,9 +58,8 @@ public class naviActivity extends AppCompatActivity
 
         String nacht = sharedPreferences1.getString("nacht", DEFAULT);
 //        RelativeLayout activity = (RelativeLayout) findViewById(R.id.drawer_layout_navi);
-        if (nacht=="1"){
-           // activity.setBackgroundColor(8);
-        }
+
+
 
         new DownloadFileFromURLVersion().execute(file_version_url);
 
@@ -117,30 +114,6 @@ public class naviActivity extends AppCompatActivity
             ad3.show();
 
         }
-
-//Find the view by its id
-
-
-//Set the text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);

@@ -54,6 +54,7 @@ public class plan2Activity extends AppCompatActivity
         WebView22.loadUrl(url22);
         WebView22.getSettings().setSupportZoom(true);
         WebView22.getSettings().setBuiltInZoomControls(true);
+        WebView22.setInitialScale(100);
     }
 
     @Override

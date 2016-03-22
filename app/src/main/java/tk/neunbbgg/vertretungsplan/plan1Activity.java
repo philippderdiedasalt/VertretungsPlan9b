@@ -52,9 +52,10 @@ public class plan1Activity extends AppCompatActivity
         baktualisieren12 = (ImageButton) findViewById(R.id.baktualisieren12);
         WebView12 =(WebView)findViewById(R.id.WebView12);
         baktualisieren12.setOnClickListener(this);
-        WebView12.loadUrl("File://" + Environment.getExternalStorageDirectory()+"/heute.htm");
+        WebView12.loadUrl("File://" + Environment.getExternalStorageDirectory() + "/heute.htm");
         WebView12.getSettings().setSupportZoom(true);
         WebView12.getSettings().setBuiltInZoomControls(true);
+        WebView12.setInitialScale(100);
     }
 
     @Override
