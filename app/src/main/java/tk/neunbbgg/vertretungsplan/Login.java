@@ -47,8 +47,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     CheckBox cbspeichern;
     ImageView pl;
     public static String serverip = "wji0znhdkmk4m6wr.myfritz.net";
-    public static String file_heute_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_heute.htm";
-    public static String file_morgen_url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
+    public static String file_heute_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_heute.htm";
+    public static String file_morgen_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_morgen.htm";
 
 
     @Override
