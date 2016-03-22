@@ -9,13 +9,14 @@ import android.widget.ImageView;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     ImageView easter;
     Integer x = 0;
-    public static String appversion="4.1";
+    public static String appversion="4.1.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         easter = (ImageView) findViewById(R.id.easter);
-//        easter.setOnClickListener(this);
+
+
         startActivity(new Intent(this, Login.class));
     }
 

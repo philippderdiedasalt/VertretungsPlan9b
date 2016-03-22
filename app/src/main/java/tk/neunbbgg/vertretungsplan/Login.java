@@ -20,10 +20,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -228,6 +226,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     jauth.put("command", "auth");
                     data.put("username", etUsername.getText().toString());
                     data.put("password", etPassword.getText().toString());
+                    data.put("device_id", Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID));
                     jauth.put("data", data);
                     jauth.toString();
                 } catch (JSONException e) {
