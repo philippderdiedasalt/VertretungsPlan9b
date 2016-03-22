@@ -58,7 +58,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
-        String registred = sharedPreferences.getString("isregistred", "0");
+        String registred = sharedPreferences.getString("isRegistred", "0");
 
         String username = sharedPreferences.getString("usernamelogin", null);
 
@@ -95,14 +95,13 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         if (autologin.equals("1")) {
             if (mWifi.isConnected()) {
-                if (username !=null) {
+                if (!(username.equals(null))) {
                     new Thread(new Runnable() {
-                        @Override
                         public void run() {
                             auth();
                         }
-                    });
-                    auth();
+                    }).start();
+
                 }
             } else {
                 if (registred.equals("1")) {
