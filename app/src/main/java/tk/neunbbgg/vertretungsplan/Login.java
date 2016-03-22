@@ -121,6 +121,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
 
     }
+
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
@@ -128,9 +129,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         // Check which checkbox was clicked
         switch (view.getId()) {
             case R.id.cbspeichern:
-                if (checked){
-                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                if (checked) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("usernamelogin", etUsername.getText().toString());
                     editor.putString("passwordlogin", etPassword.getText().toString());
                     editor.putBoolean("logindata", true);
@@ -139,15 +140,15 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     Toast.makeText(this, "Gespeichert!", Toast.LENGTH_LONG).show();
                 }
                 // Put some meat on the sandwich
-                else{
-                    SharedPreferences sharedPreferences=getSharedPreferences("MyData",MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                else {
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("usernamelogin", null);
                     editor.putString("passwordlogin", null);
                     editor.putBoolean("logindata", false);
                     editor.commit();
 
-                    Toast.makeText(this,"Gespeichert!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Gespeichert!", Toast.LENGTH_LONG).show();
                 }
                 // Remove the meat
                 break;
@@ -226,7 +227,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     jauth.put("command", "auth");
                     data.put("username", etUsername.getText().toString());
                     data.put("password", etPassword.getText().toString());
-                    data.put("device_id", Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID));
+                    data.put("device_id", Settings.Secure.getString(this.getContentResolver(),
+                            Settings.Secure.ANDROID_ID));
                     jauth.put("data", data);
                     jauth.toString();
                 } catch (JSONException e) {
@@ -244,22 +246,17 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 System.out.println(message);
                 pw.close();
                 if (message.equals("true")) {
-                    if (isregistred()) {
-                        startActivity(new Intent(this, naviActivity.class));
-                    }
-                    else if (!isregistred()) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("isRegistred", "1");
-                        editor.commit();
-                        System.out.println("AndroidId: " + Settings.Secure.getString(this.getContentResolver(),
-                                Settings.Secure.ANDROID_ID));
-                        register(etUsername.getText().toString(), Settings.Secure.getString(this.getContentResolver(),
-                                Settings.Secure.ANDROID_ID));
-                        startActivity(new Intent(this, naviActivity.class));
-                    }
-                }
-                else if (message.equals("false")) {
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("isRegistred", "1");
+                    editor.commit();
+                    System.out.println("AndroidId: " + Settings.Secure.getString(this.getContentResolver(),
+                            Settings.Secure.ANDROID_ID));
+
+                    startActivity(new Intent(this, naviActivity.class));
+
+                } else if (message.equals("false")) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -278,86 +275,18 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
                     });
                 }
-            }
-
-            catch(UnknownHostException e){
+            } catch (UnknownHostException e) {
                 e.printStackTrace();
-            }
-            catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
 
             }
 
 
         }
-    }
-
-    private void register(String etUsername, String androidId) {
-        try {
-            Socket socket = new Socket(InetAddress.getByName(serverip), 8099);
-
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-
-            JSONObject jregister = new JSONObject();
-            JSONObject data = new JSONObject();
-
-            jregister.put("command", "registerid");
-            data.put("username", etUsername);
-            data.put("androidid", androidId);
-            jregister.put("data", data);
-            jregister.toString();
-            System.out.println(androidId);
-            pw.println(jregister);
-            pw.flush();
-            pw.close();
-
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private boolean isregistred() {
-        Socket socket = null;
-        boolean b = false;
-        try {
-            socket = new Socket(InetAddress.getByName(serverip), 8099);
-            PrintWriter pw1 = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-
-            JSONObject jregistred = new JSONObject();
-            JSONObject rdata = new JSONObject();
-
-            jregistred.put("command", "isRegistred");
-
-            rdata.put("username", etUsername.getText().toString());
-            rdata.put("device_id", Settings.Secure.ANDROID_ID);
-            System.out.println(Settings.Secure.ANDROID_ID);
-
-            jregistred.put("data", rdata);
-            jregistred.toString();
-
-            pw1.println(jregistred);
-            pw1.flush();
-            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            String message;
-            message = br.readLine();
-            if (message.equals("registed")){
-                b = true;
-            }
-            else if (message.equals("notregistred")){
-                b = false;
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return b;
     }
 }
+
 class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
 
