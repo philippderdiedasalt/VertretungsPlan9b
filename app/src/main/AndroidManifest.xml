@@ -1,49 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="tk.neunbbgg.vertretungsplan">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tk.neunbbgg.vertretungsplan">
 
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
-    android:screenOrientation="portrait" android:supportsRtl="true" android:theme="@style/AppTheme.AppBarOverlay">
-    <activity android:name=".MainActivity" android:label="@string/app_name"
-        android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity android:name=".Login" android:label="@string/title_activity_login"
-        android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".naviActivity" android:label="Start" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".plan1Activity" android:label="Heute Plan" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".plan2Activity" android:label="Morgen Plan" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".bilderActivity" android:label="Bilder" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".mensaActivity" android:label="Mensaplan" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".haActivity" android:label="Hausaufgaben" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".termineActivity" android:label="Termine" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".SettingsActivity" android:label="Einstellungen"
-        android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".easterActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".stundenActivity" android:label="Stundenplan" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".telefonActivity" android:label="Telefonliste" android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
-</application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".naviActivity"
+            android:label="Start"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".plan1Activity"
+            android:label="Heute Plan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".plan2Activity"
+            android:label="Morgen Plan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bilderActivity"
+            android:label="Bilder"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mensaActivity"
+            android:label="Mensaplan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".haActivity"
+            android:label="Hausaufgaben"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".termineActivity"
+            android:label="Termine"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Einstellungen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".easterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".stundenActivity"
+            android:label="Stundenplan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telefonActivity"
+            android:label="Telefonliste"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".pwActivity"></activity>
+    </application>
 
 </manifest>
-
-

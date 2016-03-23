@@ -35,6 +35,8 @@ public class mensaActivity extends AppCompatActivity
 
         mensa.getSettings().setSupportZoom(true);
         mensa.getSettings().setBuiltInZoomControls(true);
+        mensa.setInitialScale(100);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

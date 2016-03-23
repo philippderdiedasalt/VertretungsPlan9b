@@ -175,6 +175,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 startActivity(browserIntent);
 
                 break;
+            case R.id.bvergessen:
+                startActivity(new Intent(this, pwActivity.class));
+                break;
 
 
         }
