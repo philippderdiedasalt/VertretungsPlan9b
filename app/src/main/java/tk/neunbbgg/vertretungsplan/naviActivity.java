@@ -6,9 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,27 +23,31 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     public static String file_version_url = "https://dl.dropboxusercontent.com/u/270150900/version.txt";
     Button blogout1;
     ImageButton bup;
-
     ImageView pm1;
     CheckBox cb1;
     public static final String DEFAULT="N/A";
     public String path = "/variables";
     public String version;
+    public static String serverip = "wji0znhdkmk4m6wr.myfritz.net";
+    String versionofonapp = null;
+    public String ver123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,64 +57,9 @@ public class naviActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences1=getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
-        String nacht = sharedPreferences1.getString("nacht", DEFAULT);
-//        RelativeLayout activity = (RelativeLayout) findViewById(R.id.drawer_layout_navi);
 
 
 
-        new DownloadFileFromURLVersion().execute(file_version_url);
-
-        File sdcard = Environment.getExternalStorageDirectory();
-
-//Get the text file
-
-
-//Read text from file
-        StringBuilder text = new StringBuilder();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(sdcard.getPath()+"/version.txt"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-
-            }
-            br.close();
-        }
-        catch (IOException e) {
-            //You'll need to add proper error
-            // handling here
-            System.out.println("FEHLER VERSION:TXT="+text.toString());
-        }
-
-
-
-
-        if ((!text.toString().equals(MainActivity.appversion))){
-
-            AlertDialog ad3 = new AlertDialog.Builder(this).create();
-            ad3.setCancelable(false); // This blocks the 'BACK' button
-            ad3.setMessage("Update Verfügbar: Ver.: " + text.toString());
-            ad3.setButton("Holen!", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://github.com/philippDerDieDas/VertretungsPlan9b/raw/master/app/build/outputs/apk/app-debug.apk"));
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-            });
-            ad3.setButton2("Abbrechen", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    dialog.dismiss();
-                }
-            });
-            ad3.show();
-
-        }
 
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
@@ -148,7 +94,78 @@ public class naviActivity extends AppCompatActivity
 
         blogout1.setOnClickListener(this);
         pm1.setOnClickListener(this);
+
+        new Thread(new Runnable() {
+            public void run() {
+                getversion();
+            }
+        }).start();
+
+
     }
+
+    private void getversion() {
+        String message = null;
+        try {
+            Socket socket = new Socket(InetAddress.getByName(serverip), 8099);
+            JSONObject jauth = new JSONObject();
+            JSONObject data = new JSONObject();
+            try {
+                jauth.put("command", "version");
+                jauth.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+
+            pw.println(jauth);
+            pw.flush();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            message = br.readLine();
+            System.out.println(message);
+            ver123 = message;
+
+            if(!(message.equals(MainActivity.appversion))){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog ad = new AlertDialog.Builder(naviActivity.this).create();
+                        ad.setCancelable(false); // This blocks the 'BACK' button
+                        ad.setMessage("Update verfügbar!\nVersion: " + ver123);
+                        ad.setButton("Holen!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("https://github.com/philippDerDieDas/VertretungsPlan9b/raw/master/app/build/outputs/apk/app-debug.apk"));
+                                startActivity(intent);
+
+                                dialog.dismiss();
+                            }
+                        });
+                        ad.show();
+
+                    }
+
+                });
+            }
+
+
+            pw.close();
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+
 
 
 
@@ -182,7 +199,6 @@ public class naviActivity extends AppCompatActivity
         } else if (id == R.id.action_aktu){
             new DownloadFileFromURL().execute(Login.file_heute_url);
             new DownloadFileFromURL().execute(Login.file_morgen_url);
-            new DownloadFileFromURLVersion().execute(naviActivity.file_version_url);
             new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
             Toast.makeText(getApplicationContext() , "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }
@@ -237,12 +253,19 @@ public class naviActivity extends AppCompatActivity
 
                 break;
             case R.id.bup:
-               int a = 1;
-                new DownloadFileFromURLVersion().execute(file_version_url);
-                startActivity(new Intent(this, naviActivity.class));
-                break;
+                new Thread(new Runnable() {
+                    public void run() {
+                       getversion();
+                    }
+                }).start();
+
+
+
         }
     }
+
+
+
     public void onCheckboxClicked1(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
@@ -272,62 +295,4 @@ public class naviActivity extends AppCompatActivity
 
         }
     }
-}
-class DownloadFileFromURLVersion extends AsyncTask<String, String, String> {
-
-    /**
-     * Before starting background thread
-     * Show Progress Bar Dialog
-     * */
-
-    /**
-     * Downloading file in background thread
-     * */
-    @Override
-    protected String doInBackground(String... f_url) {
-        int count;
-        try {
-            URL url = new URL(f_url[0]);
-            URLConnection conection = url.openConnection();
-            conection.connect();
-            // getting file length
-            int lenghtOfFile = conection.getContentLength();
-
-            // input stream to read file - with 8k buffer
-            InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-            // Output stream to write file
-
-            FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/version.txt");
-
-            byte data[] = new byte[1024];
-
-            long total = 0;
-
-            while ((count = input.read(data)) != -1) {
-                total += count;
-                // publishing the progress....
-                // After this onProgressUpdate will be called
-                publishProgress(""+(int)((total*100)/lenghtOfFile));
-
-                // writing data to file
-                output.write(data, 0, count);
-            }
-
-            // flushing output
-            output.flush();
-
-            // closing streams
-            output.close();
-            input.close();
-
-        } catch (Exception e) {
-            Log.e("Error: ", e.getMessage());
-        }
-
-        return null;
-    }
-
-
-
 }

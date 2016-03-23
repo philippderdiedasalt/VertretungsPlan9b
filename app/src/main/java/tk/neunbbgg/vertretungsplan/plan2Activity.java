@@ -87,7 +87,6 @@ public class plan2Activity extends AppCompatActivity
         } else if (id == R.id.action_aktu){
             new DownloadFileFromURL().execute(Login.file_heute_url);
             new DownloadFileFromURL().execute(Login.file_morgen_url);
-            new DownloadFileFromURLVersion().execute(naviActivity.file_version_url);
             new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
             Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }
