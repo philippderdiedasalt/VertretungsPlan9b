@@ -86,7 +86,22 @@
             android:label="Telefonliste"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".pwActivity"></activity>
+        <activity
+            android:name=".Passreset"
+            android:label="@string/title_activity_passreset"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
+        <receiver android:name=".VplanWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/vplan_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

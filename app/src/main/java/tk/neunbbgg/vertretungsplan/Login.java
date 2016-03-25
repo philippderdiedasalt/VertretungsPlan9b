@@ -20,8 +20,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -74,6 +76,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         new DownloadFileFromURL().execute(file_heute_url);
         new DownloadFileFromURL2().execute(file_morgen_url);
+        new DownloadFileFromURLIheute();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -176,7 +179,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
                 break;
             case R.id.bvergessen:
-                startActivity(new Intent(this, pwActivity.class));
+                startActivity(new Intent(this, Passreset.class));
                 break;
 
 
@@ -365,6 +368,56 @@ class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
 
             // Output stream to write file
             OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/morgen.htm");
+
+            byte data[] = new byte[1024];
+
+            long total = 0;
+
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                // publishing the progress....
+                // After this onProgressUpdate will be called
+                publishProgress(""+(int)((total*100)/lenghtOfFile));
+
+                // writing data to file
+                output.write(data, 0, count);
+            }
+
+            // flushing output
+            output.flush();
+
+            // closing streams
+            output.close();
+            input.close();
+
+        } catch (Exception e) {
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
+}
+class DownloadFileFromURLIheute extends AsyncTask<String, String, String> {
+
+    @Override
+    protected String doInBackground(String... f_url) {
+        int count;
+        try {
+            URL url = new URL(f_url[0]);
+            URLConnection conection = url.openConnection();
+            conection.connect();
+            // getting file length
+            int lenghtOfFile = conection.getContentLength();
+
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+            // Output stream to write file
+
+            OutputStream output = new FileOutputStream(Environment.getDataDirectory() +"/heute.png");
 
             byte data[] = new byte[1024];
 

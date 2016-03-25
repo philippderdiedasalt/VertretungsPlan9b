@@ -21,10 +21,13 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_stunden">stundenActivity</string>
     <string name="title_activity_telefon">telefonActivity</string>
+    <string name="title_activity_passreset">Passreset</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
     <string name="action_example">Example action</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
