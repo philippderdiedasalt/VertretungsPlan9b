@@ -84,8 +84,9 @@ public class bilderActivity extends AppCompatActivity implements NavigationView.
             new DownloadFileFromURL().execute(Login.file_morgen_url);
             new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
             Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.action_chpw){
+        startActivity(new Intent(this, changepwActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -11,4 +11,9 @@
         android:orderInCategory="100"
         android:title="Alles Aktualisieren"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_chpw"
+        android:orderInCategory="100"
+        android:title="Passwort ändern"
+        app:showAsAction="never" />
 </menu>

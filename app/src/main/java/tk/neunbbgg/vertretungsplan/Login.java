@@ -76,7 +76,6 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         new DownloadFileFromURL().execute(file_heute_url);
         new DownloadFileFromURL2().execute(file_morgen_url);
-        new DownloadFileFromURLIheute();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -124,7 +123,18 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
 
     }
-
+   /** public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    } **/
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
@@ -135,6 +145,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 if (checked) {
                     SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+
                     editor.putString("usernamelogin", etUsername.getText().toString());
                     editor.putString("passwordlogin", etPassword.getText().toString());
                     editor.putBoolean("logindata", true);
@@ -368,56 +379,6 @@ class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
 
             // Output stream to write file
             OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/morgen.htm");
-
-            byte data[] = new byte[1024];
-
-            long total = 0;
-
-            while ((count = input.read(data)) != -1) {
-                total += count;
-                // publishing the progress....
-                // After this onProgressUpdate will be called
-                publishProgress(""+(int)((total*100)/lenghtOfFile));
-
-                // writing data to file
-                output.write(data, 0, count);
-            }
-
-            // flushing output
-            output.flush();
-
-            // closing streams
-            output.close();
-            input.close();
-
-        } catch (Exception e) {
-            Log.e("Error: ", e.getMessage());
-        }
-
-        return null;
-    }
-
-
-
-}
-class DownloadFileFromURLIheute extends AsyncTask<String, String, String> {
-
-    @Override
-    protected String doInBackground(String... f_url) {
-        int count;
-        try {
-            URL url = new URL(f_url[0]);
-            URLConnection conection = url.openConnection();
-            conection.connect();
-            // getting file length
-            int lenghtOfFile = conection.getContentLength();
-
-            // input stream to read file - with 8k buffer
-            InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-            // Output stream to write file
-
-            OutputStream output = new FileOutputStream(Environment.getDataDirectory() +"/heute.png");
 
             byte data[] = new byte[1024];
 

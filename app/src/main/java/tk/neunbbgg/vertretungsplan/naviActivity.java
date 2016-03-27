@@ -57,10 +57,6 @@ public class naviActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences1=getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
-
-
-
-
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String autologin = sharedPreferences.getString("ischecked", DEFAULT);
 
@@ -201,6 +197,8 @@ public class naviActivity extends AppCompatActivity
             new DownloadFileFromURL().execute(Login.file_morgen_url);
             new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
             Toast.makeText(getApplicationContext() , "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.action_chpw){
+            startActivity(new Intent(this, changepwActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
