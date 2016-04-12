@@ -3,6 +3,7 @@ package tk.neunbbgg.vertretungsplan;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,7 +29,7 @@ public class mensaActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mensa = (WebView) findViewById(R.id.mensa);
-        String urlm="http://gymglinde.de/typo40/index.php?id=1037";
+        String urlm="file://" + Environment.getExternalStorageDirectory() + "/mensa.png";
         mensa.loadUrl(urlm);
         bmensa = (ImageButton) findViewById(R.id.bmensa);
         bmensa.setOnClickListener(this);

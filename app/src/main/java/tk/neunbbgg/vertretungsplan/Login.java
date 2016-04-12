@@ -49,6 +49,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     public static String serverip = "wji0znhdkmk4m6wr.myfritz.net";
     public static String file_heute_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_heute.htm";
     public static String file_morgen_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_morgen.htm";
+    public static String file_mensa_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/mensa.png";
 
 
     @Override
@@ -76,6 +77,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         new DownloadFileFromURL().execute(file_heute_url);
         new DownloadFileFromURL2().execute(file_morgen_url);
+        new DownloadFileFromURL3().execute(Login.file_mensa_url);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -407,7 +409,50 @@ class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
 
         return null;
     }
+}
+class DownloadFileFromURL3 extends AsyncTask<String, String, String> {
 
+    @Override
+    protected String doInBackground(String... f_url) {
+        int count;
+        try {
+            URL url = new URL(f_url[0]);
+            URLConnection conection = url.openConnection();
+            conection.connect();
+            // getting file length
+            int lenghtOfFile = conection.getContentLength();
 
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
+            // Output stream to write file
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/mensa.png");
+
+            byte data[] = new byte[1024];
+
+            long total = 0;
+
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                // publishing the progress....
+                // After this onProgressUpdate will be called
+                publishProgress("" + (int) ((total * 100) / lenghtOfFile));
+
+                // writing data to file
+                output.write(data, 0, count);
+            }
+
+            // flushing output
+            output.flush();
+
+            // closing streams
+            output.close();
+            input.close();
+
+        } catch (Exception e) {
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return null;
+    }
 }
