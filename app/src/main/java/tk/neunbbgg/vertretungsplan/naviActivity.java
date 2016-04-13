@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -107,7 +108,12 @@ public class naviActivity extends AppCompatActivity
             JSONObject jauth = new JSONObject();
             JSONObject data = new JSONObject();
             try {
+                SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("usernamelogin", null);
                 jauth.put("command", "version");
+                data.put("username", username);
+                data.put("version", Build.VERSION.RELEASE);
+                jauth.put("data", data);
                 jauth.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -252,7 +258,8 @@ public class naviActivity extends AppCompatActivity
 
                 break;
             case R.id.bup:
-                new Thread(new Runnable() {
+                new Thread(
+                        new Runnable() {
                     public void run() {
                        getversion();
                     }

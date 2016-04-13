@@ -1,6 +1,7 @@
 package tk.neunbbgg.vertretungsplan;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,7 +39,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.UnknownHostException;
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
     public static final String DEFAULT = "N/A";
@@ -50,6 +50,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     public static String file_heute_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_heute.htm";
     public static String file_morgen_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/PH_morgen.htm";
     public static String file_mensa_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/mensa.png";
+    ProgressDialog load;
 
 
     @Override
@@ -98,12 +99,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         if (autologin.equals("1")) {
             if (mWifi.isConnected()) {
                 if (!(username.equals(null))) {
-                    new Thread(new Runnable() {
-                        public void run() {
-                            auth();
-                        }
-                    }).start();
-
+                    auth();
                 }
             } else {
                 if (registred.equals("1")) {
@@ -176,14 +172,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogin:
-
-                new Thread(new Runnable() {
-                    public void run() {
-                        auth();
-                    }
-                }).start();
-
-
+                auth();
                 break;
             case R.id.pl:
 
@@ -198,9 +187,34 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         }
     }
+    void auth(){
+        load = new ProgressDialog(this);
+        load.setIndeterminate(true);
+        load.setCancelable(false);
+        load.setMessage("logging in...");
+        load.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        load.show();
+        new Thread(new Runnable() {
+            public void run() {
+                mainauth();
+            }
+        }).start();
 
-    void auth() {
+
+    }
+    void loginsuccess(boolean succ){
+        load.dismiss();
+        if(succ){
+            startActivity(new Intent(this, naviActivity.class));
+        }
+
+    }
+    void mainauth() {
+
+
+
         if (etUsername.getText().toString().isEmpty()) {
+            loginsuccess(false);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -219,7 +233,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         }
         if (etPassword.getText().toString().isEmpty()) {
+            loginsuccess(false);
             runOnUiThread(new Runnable() {
+
                 @Override
                 public void run() {
                     AlertDialog ad = new AlertDialog.Builder(Login.this).create();
@@ -272,10 +288,10 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     editor.commit();
                     System.out.println("AndroidId: " + Settings.Secure.getString(this.getContentResolver(),
                             Settings.Secure.ANDROID_ID));
-
-                    startActivity(new Intent(this, naviActivity.class));
+                    loginsuccess(true);
 
                 } else if (message.equals("false")) {
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -293,18 +309,20 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                         }
 
                     });
+                    loginsuccess(false);
                 }
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+                loginsuccess(false);
 
             }
 
 
         }
+
     }
 }
+
 
 class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
