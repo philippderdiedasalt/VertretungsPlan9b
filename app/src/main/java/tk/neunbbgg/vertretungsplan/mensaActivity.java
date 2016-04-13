@@ -87,7 +87,8 @@ public class mensaActivity extends AppCompatActivity
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.action_aktu){
             new DownloadFileFromURL().execute(Login.file_heute_url);
-            new DownloadFileFromURL().execute(Login.file_morgen_url);
+            new DownloadFileFromURL2().execute(Login.file_morgen_url);
+            new DownloadFileFromURL3().execute(Login.file_mensa_url);
             new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
             Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.action_chpw){
@@ -132,7 +133,7 @@ public class mensaActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        String urlm="http://gymglinde.de/typo40/index.php?id=1037";
+        String urlm ="file://" + Environment.getExternalStorageDirectory() + "/mensa.png";
         mensa.loadUrl(urlm);
     }
 }
