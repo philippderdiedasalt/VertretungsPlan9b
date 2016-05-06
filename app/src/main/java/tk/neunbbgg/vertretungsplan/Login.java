@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -75,10 +77,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         cbspeichern.setChecked(loginsave);
 
-
-        new DownloadFileFromURL().execute(file_heute_url);
-        new DownloadFileFromURL2().execute(file_morgen_url);
-        new DownloadFileFromURL3().execute(Login.file_mensa_url);
+        new DownloadFileFromURL().execute(file_heute_url, getFilesDir().getPath());
+        new DownloadFileFromURL2().execute(file_morgen_url, getFilesDir().getPath());
+        new DownloadFileFromURL3().execute(Login.file_mensa_url, getFilesDir().getPath());
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -176,7 +177,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 break;
             case R.id.pl:
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://9bgg.tk"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://9b-gg.jimdo.com"));
                 startActivity(browserIntent);
 
                 break;
@@ -335,6 +336,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
     /**
      * Downloading file in background thread
      * */
+
     @Override
     protected String doInBackground(String... f_url) {
         int count;
@@ -349,7 +351,8 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/heute.htm");
+
+            OutputStream output = new FileOutputStream(f_url[1]+"/heute.htm");
 
             byte data[] = new byte[1024];
 
@@ -398,7 +401,7 @@ class DownloadFileFromURL2 extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/morgen.htm");
+            OutputStream output = new FileOutputStream(f_url[1]+"/morgen.htm");
 
             byte data[] = new byte[1024];
 
@@ -444,7 +447,7 @@ class DownloadFileFromURL3 extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/mensa.png");
+            OutputStream output = new FileOutputStream( f_url[1] + "/mensa.png");
 
             byte data[] = new byte[1024];
 

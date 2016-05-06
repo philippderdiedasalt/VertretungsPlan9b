@@ -34,7 +34,7 @@ public class plan2Activity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://9bgg.tk/"));
+                        Uri.parse("http://9b-gg.jimdo.com/"));
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class plan2Activity extends AppCompatActivity
         baktualisieren22 = (ImageButton) findViewById(R.id.baktualisieren22);
         WebView22 =(WebView)findViewById(R.id.WebView22);
         baktualisieren22.setOnClickListener(this);
-        String url22 ="file://"+ Environment.getExternalStorageDirectory()+"/morgen.htm";
+        String url22 ="file://"+ getFilesDir().getPath()+"/morgen.htm";
         WebView22.loadUrl(url22);
         WebView22.getSettings().setSupportZoom(true);
         WebView22.getSettings().setBuiltInZoomControls(true);
@@ -85,10 +85,10 @@ public class plan2Activity extends AppCompatActivity
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.action_aktu){
-            new DownloadFileFromURL().execute(Login.file_heute_url);
-            new DownloadFileFromURL2().execute(Login.file_morgen_url);
-            new DownloadFileFromURL3().execute(Login.file_mensa_url);
-            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
+            new DownloadFileFromURL().execute(Login.file_heute_url, getFilesDir().getPath());
+            new DownloadFileFromURL2().execute(Login.file_morgen_url, getFilesDir().getPath());
+            new DownloadFileFromURL3().execute(Login.file_mensa_url, getFilesDir().getPath());
+            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url, getFilesDir().getPath());
             Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.action_chpw){
             startActivity(new Intent(this, changepwActivity.class));
@@ -139,7 +139,7 @@ public class plan2Activity extends AppCompatActivity
                 String url = "http://gymglinde.de/typo40/fileadmin/vertretungsplan/VertretungAktuell/PH_morgen.htm";
                 new DownloadFileFromURL().execute(url);
 
-                WebView22.loadUrl("file:///sdcard/morgen.htm");
+                WebView22.loadUrl("file://"+getFilesDir().getPath()+"/morgen.htm");
 
 
                 break;

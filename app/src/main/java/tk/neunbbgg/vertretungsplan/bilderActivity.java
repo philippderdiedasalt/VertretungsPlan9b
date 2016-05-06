@@ -36,7 +36,7 @@ public class bilderActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://9bgg.tk/"));
+                        Uri.parse("http://9b-gg.jimdo.com/"));
                 startActivity(intent);
             }
         });
@@ -80,10 +80,10 @@ public class bilderActivity extends AppCompatActivity implements NavigationView.
             startActivity(new Intent(this, SettingsActivity.class));
         }
         else if (id == R.id.action_aktu){
-            new DownloadFileFromURL().execute(Login.file_heute_url);
-            new DownloadFileFromURL2().execute(Login.file_morgen_url);
-            new DownloadFileFromURL3().execute(Login.file_mensa_url);
-            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url);
+            new DownloadFileFromURL().execute(Login.file_heute_url, getFilesDir().getPath());
+            new DownloadFileFromURL2().execute(Login.file_morgen_url, getFilesDir().getPath());
+            new DownloadFileFromURL3().execute(Login.file_mensa_url, getFilesDir().getPath());
+            new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url, getFilesDir().getPath());
             Toast.makeText(getApplicationContext(), "Alles Aktualisiert", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.action_chpw){
         startActivity(new Intent(this, changepwActivity.class));

@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://9bgg.tk/"));
+                        Uri.parse("http://9b-gg.jimdo.com/"));
                 startActivity(intent);
             }
         });
