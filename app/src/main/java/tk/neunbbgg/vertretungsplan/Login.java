@@ -1,5 +1,7 @@
 package tk.neunbbgg.vertretungsplan;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,8 +16,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +43,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
@@ -54,12 +61,42 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     public static String file_mensa_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/mensa.png";
     ProgressDialog load;
 
+    private static final int REQUEST_READ_PHONE_STATE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_PHONE_STATE
+    };
 
+    public static void verifyphonePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            final Activity activity1 = activity;
+            AlertDialog ad = new AlertDialog.Builder(activity).create();
+            ad.setCancelable(false); // This blocks the 'BACK' button
+            ad.setMessage("Um dich einzuloggen braucht die App Zugriff auf \ndas Telefon um deine Device-ID zubekommen.\nDies ist nötig damit die App nicht missbraucht wird!");
+            ad.setTitle("Wichtig!");
+            ad.setButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    ActivityCompat.requestPermissions(
+                            activity1,
+                            PERMISSIONS_STORAGE,
+                            REQUEST_READ_PHONE_STATE
+                    );
+                }
+            });
+            ad.show();
+
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
         String registred = sharedPreferences.getString("isRegistred", "0");
@@ -72,6 +109,15 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         Boolean loginsave = sharedPreferences.getBoolean("logindata", false);
 
+
+
+
+
+        verifyphonePermissions(this);
+
+
+
+
         cbspeichern = (CheckBox) findViewById(R.id.cbspeichern);
 
 
@@ -79,7 +125,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         new DownloadFileFromURL().execute(file_heute_url, getFilesDir().getPath());
         new DownloadFileFromURL2().execute(file_morgen_url, getFilesDir().getPath());
-        new DownloadFileFromURL3().execute(Login.file_mensa_url, getFilesDir().getPath());
+        new DownloadFileFromURL3().execute(file_mensa_url, getFilesDir().getPath());
+        new DownloadFileFromURLS().execute(stundenActivity.file_stunden_url, getFilesDir().getPath());
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -99,7 +146,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         if (autologin.equals("1")) {
             if (mWifi.isConnected()) {
-                if (!(username.equals(null))) {
+                if (username != null) {
                     auth();
                 }
             } else {
@@ -173,6 +220,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogin:
+
+
                 auth();
                 break;
             case R.id.pl:
@@ -256,7 +305,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         if (!(etUsername.getText().toString().isEmpty() || (etPassword.getText().toString().isEmpty()))) {
 
             try {
-                Socket socket = new Socket(InetAddress.getByName(serverip), 8099);
+                Socket lolsocket = new Socket(Inet4Address.getByName(serverip), 8099);
                 JSONObject jauth = new JSONObject();
                 JSONObject data = new JSONObject();
                 try {
@@ -265,23 +314,26 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     data.put("password", etPassword.getText().toString());
                     data.put("device_id", Settings.Secure.getString(this.getContentResolver(),
                             Settings.Secure.ANDROID_ID));
+                    TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+                    String mPhoneNumber = tMgr.getLine1Number();
+                    data.put("phone", mPhoneNumber);
                     jauth.put("data", data);
                     jauth.toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-
-                PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+                PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(lolsocket.getOutputStream())));
 
                 pw.println(jauth);
                 pw.flush();
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedReader br = new BufferedReader(new InputStreamReader(lolsocket.getInputStream()));
                 String message = br.readLine();
                 System.out.println(message);
                 pw.close();
-                if (message.equals("true")) {
+                lolsocket.close();
+                if (message.equals("\uFEFFtrue")) {
 
                     SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -291,7 +343,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                             Settings.Secure.ANDROID_ID));
                     loginsuccess(true);
 
-                } else if (message.equals("false")) {
+                } else if (message.equals("\uFEFFfalse")) {
 
                     runOnUiThread(new Runnable() {
                         @Override

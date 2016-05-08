@@ -123,7 +123,8 @@ public class changepwActivity extends Activity implements View.OnClickListener {
             String message = br.readLine();
             System.out.println(message);
             pw.close();
-            if (message.equals("true")) {
+            socket.close();
+            if (message.equals("\uFEFFtrue")) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -141,7 +142,7 @@ public class changepwActivity extends Activity implements View.OnClickListener {
                     }
 
                 });
-            } else if (message.equals("false")) {
+            } else if (message.equals("\uFEFFfalse")) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

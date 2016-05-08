@@ -28,7 +28,7 @@ import java.net.URLConnection;
 
 public class stundenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public static String file_stunden_url = "https://dl.dropboxusercontent.com/u/270150900/stunden.html";
+    public static String file_stunden_url = "http://wji0znhdkmk4m6wr.myfritz.net:8081/stunden.html";
     WebView wstunden;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +144,7 @@ class DownloadFileFromURLS extends AsyncTask<String, String, String> {
     /**
      * Downloading file in background thread
      * */
+
     @Override
     protected String doInBackground(String... f_url) {
         int count;
@@ -158,7 +159,8 @@ class DownloadFileFromURLS extends AsyncTask<String, String, String> {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            OutputStream output = new FileOutputStream("file://"+f_url[1]+"/stunden.html");
+
+            OutputStream output = new FileOutputStream(f_url[1]+"/stunden.html");
 
             byte data[] = new byte[1024];
 

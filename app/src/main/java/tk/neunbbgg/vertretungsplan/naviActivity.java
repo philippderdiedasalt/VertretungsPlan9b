@@ -48,7 +48,7 @@ public class naviActivity extends AppCompatActivity
     public String version;
     public static String serverip = "wji0znhdkmk4m6wr.myfritz.net";
     String versionofonapp = null;
-    public String ver123;
+    public String ver123, news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +94,51 @@ public class naviActivity extends AppCompatActivity
 
         new Thread(new Runnable() {
             public void run() {
+                //news = getnews();
                 getversion();
             }
         }).start();
 
 
     }
+    private String getnews(){
+        String message = null;
+        try {
+            Socket socket2 = new Socket(InetAddress.getByName(serverip), 8099);
+            JSONObject jauth = new JSONObject();
+            JSONObject data = new JSONObject();
+            try {
+                jauth.put("command", "news");
+                data.put("nr", "5");
+                jauth.put("data", data);
+                jauth.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket2.getOutputStream())));
+
+            pw.println(jauth);
+            pw.flush();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
+            message = br.readLine();
+            System.out.println(message);
+            news = message;
+
+            pw.close();
+            socket2.close();
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return message;
+    }
     private void getversion() {
         String message = null;
         try {
@@ -111,6 +149,7 @@ public class naviActivity extends AppCompatActivity
                 SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
                 String username = sharedPreferences.getString("usernamelogin", null);
                 jauth.put("command", "version");
+                data.put("nr", "5");
                 data.put("username", username);
                 data.put("version", Build.VERSION.RELEASE);
                 jauth.put("data", data);
@@ -129,14 +168,18 @@ public class naviActivity extends AppCompatActivity
             message = br.readLine();
             System.out.println(message);
             ver123 = message;
+            message = br.readLine();
+            System.out.println(message);
+            news = message;
 
+            socket.close();
             if(!(message.equals(MainActivity.appversion))){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         AlertDialog ad = new AlertDialog.Builder(naviActivity.this).create();
                         ad.setCancelable(false); // This blocks the 'BACK' button
-                        ad.setMessage("Update verfügbar!\nVersion: " + ver123);
+                        ad.setMessage("Update verfügbar!\nVersion: " + ver123 + "\nNeue Funktionen:\n"+ news);
                         ad.setButton("Holen!", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -156,6 +199,7 @@ public class naviActivity extends AppCompatActivity
 
 
             pw.close();
+
 
 
 
@@ -261,7 +305,8 @@ public class naviActivity extends AppCompatActivity
                 new Thread(
                         new Runnable() {
                     public void run() {
-                       getversion();
+                        //news = getnews();
+                        getversion();
                     }
                 }).start();
 
