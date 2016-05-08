@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.StringTokenizer;
 
 public class naviActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -171,7 +172,7 @@ public class naviActivity extends AppCompatActivity
             message = br.readLine();
             System.out.println(message);
             news = message;
-
+            news =  news.replaceAll("@", "\n");
             socket.close();
             if(!(message.equals(MainActivity.appversion))){
                 runOnUiThread(new Runnable() {
