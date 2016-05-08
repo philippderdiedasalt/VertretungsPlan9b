@@ -333,7 +333,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 System.out.println(message);
                 pw.close();
                 lolsocket.close();
-                if (message.equals("\uFEFFtrue")) {
+                if (message.equals("true")) {
 
                     SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -343,7 +343,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                             Settings.Secure.ANDROID_ID));
                     loginsuccess(true);
 
-                } else if (message.equals("\uFEFFfalse")) {
+                } else if (message.equals("false")) {
 
                     runOnUiThread(new Runnable() {
                         @Override

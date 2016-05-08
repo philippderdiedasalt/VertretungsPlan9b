@@ -1,6 +1,8 @@
 package tk.neunbbgg.vertretungsplan;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -48,9 +50,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
     private void initializeData(){
         persons = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String news = sharedPreferences.getString("news", "Nichts");
         persons.add(new Person("App-Version", R.drawable.orange_circle, View.GONE , "Version: " + MainActivity.appversion));
         persons.add(new Person("Kontakt", R.drawable.orange_circle, View.VISIBLE, "Kontaktiere mich, falls du ein Problem mit der App hast"));
-
+        persons.add(new Person("Neu:", R.drawable.orange_circle, View.GONE, news));
     }
 
     private void initializeAdapter(){

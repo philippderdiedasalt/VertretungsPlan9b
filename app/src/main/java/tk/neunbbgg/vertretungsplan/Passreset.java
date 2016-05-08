@@ -103,7 +103,7 @@ public class Passreset extends Activity implements View.OnClickListener {
             pw.close();
             socket.close();
 
-            if(message.equals("\uFEFFtrue")){
+            if(message.equals("true")){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -121,7 +121,7 @@ public class Passreset extends Activity implements View.OnClickListener {
                     }
 
                 });
-            } else if(message.equals("\uFEFFfalse")){
+            } else if(message.equals("false")){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

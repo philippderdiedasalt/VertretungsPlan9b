@@ -172,9 +172,16 @@ public class naviActivity extends AppCompatActivity
             message = br.readLine();
             System.out.println(message);
             news = message;
-            news =  news.replaceAll("@", "\n");
+            news = news.replaceAll("@", "\n");
+            news = news.replaceAll("ue", "ü");
+            news = news.replaceAll("ae", "ä");
+            news = news.replaceAll("oe", "ü");
             socket.close();
-            if(!(message.equals(MainActivity.appversion))){
+            SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("news", news);
+            editor.commit();
+            if(!(ver123.equals(MainActivity.appversion))){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
