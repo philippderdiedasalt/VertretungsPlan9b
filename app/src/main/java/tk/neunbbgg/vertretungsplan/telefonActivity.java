@@ -1,25 +1,47 @@
 package tk.neunbbgg.vertretungsplan;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Inet4Address;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 public class telefonActivity extends AppCompatActivity
-        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
+    RecyclerView rvt;
+    private List<Telefon> telefons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +68,96 @@ public class telefonActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        rvt = (RecyclerView)findViewById(R.id.rvt);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rvt.setLayoutManager(llm);
+        rvt.setHasFixedSize(true);
+        initializeData();
+        initializeAdapter();
+    }
+
+    private void initializeData(){
+        telefons = new ArrayList<>();
+       /** try {
+            Socket lolsocket = new Socket(Inet4Address.getByName(Login.serverip), 8099);
+            JSONObject jauth = new JSONObject();
+
+            try {
+                jauth.put("command", "telefon");
+                jauth.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(lolsocket.getOutputStream())));
+
+            pw.println(jauth);
+            pw.flush();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(lolsocket.getInputStream()));
+            boolean ws = true;
+            String message;
+            while(ws)
+            {
+                message = br.readLine();
+                if (message.isEmpty()){
+                    ws = false;
+                    System.out.wrt
+
+                }
+                else{
+                    telefons.add(new Telefon(message, ""));
+                }
+            }
+
+
+            JSONObject jexit = new JSONObject();
+            jexit.put("command", "exit");
+            jexit.toString();
+            pw.println(jexit);
+            pw.flush();
+            pw.close();
+            lolsocket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        **/
+        telefons.add(new Telefon("Kaschin Abdullah", "27866197"));
+        telefons.add(new Telefon("Anneke Brandt", "7135860"));
+        telefons.add(new Telefon("Jason Brötzmann", "72910829"));
+        telefons.add(new Telefon("Arne Butkereit", "71095205"));
+        telefons.add(new Telefon("Nele Butkereit", "7101274"));
+        telefons.add(new Telefon("Thorben Dietrich", "75366453"));
+        telefons.add(new Telefon("Masie Fabian", "21998670"));
+        telefons.add(new Telefon("Daniel Fidel", "67585512"));
+        telefons.add(new Telefon("Robert Gieser", "71141682"));
+        telefons.add(new Telefon("Ana Grimm", "2701915"));
+        telefons.add(new Telefon("Philipp Harms", "71006403"));
+        telefons.add(new Telefon("David Jaeschke", "7111002"));
+        telefons.add(new Telefon("Jonas Janzer", "74109920"));
+        telefons.add(new Telefon("Fiona Kisjeloff", "7149856"));
+        telefons.add(new Telefon("Eric Klemp", "55555466"));
+        telefons.add(new Telefon("Felix Kreutzfeld", "7136784"));
+        telefons.add(new Telefon("Tom Lührs", "73598289"));
+        telefons.add(new Telefon("Leon Maleki", "55005827"));
+        telefons.add(new Telefon("Veronika Rybalkin", "36858134"));
+        telefons.add(new Telefon("Sara Schäfer", "7101249"));
+        telefons.add(new Telefon("Tamim Shams", "35705956"));
+        telefons.add(new Telefon("Mussa Yacob", "8005787"));
+        telefons.add(new Telefon("Thomas Zonca", "32038356"));
 
     }
 
 
+    private void initializeAdapter(){
+        TelefonAdapter adaptert = new TelefonAdapter(telefons);
+        rvt.setAdapter(adaptert);
+    }
 
 
 
@@ -129,8 +237,4 @@ public class telefonActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

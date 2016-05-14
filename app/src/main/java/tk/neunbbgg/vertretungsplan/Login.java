@@ -331,6 +331,11 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 BufferedReader br = new BufferedReader(new InputStreamReader(lolsocket.getInputStream()));
                 String message = br.readLine();
                 System.out.println(message);
+                JSONObject jexit = new JSONObject();
+                jexit.put("command", "exit");
+                jexit.toString();
+                pw.println(jexit);
+                pw.flush();
                 pw.close();
                 lolsocket.close();
                 if (message.equals("true")) {
@@ -368,6 +373,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 e.printStackTrace();
                 loginsuccess(false);
 
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
 

@@ -176,6 +176,11 @@ public class naviActivity extends AppCompatActivity
             news = news.replaceAll("ue", "ü");
             news = news.replaceAll("ae", "ä");
             news = news.replaceAll("oe", "ü");
+            JSONObject jexit = new JSONObject();
+            jexit.put("command", "exit");
+            jexit.toString();
+            pw.println(jexit);
+            pw.flush();
             socket.close();
             SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -215,6 +220,8 @@ public class naviActivity extends AppCompatActivity
         } catch (IOException e) {
             e.printStackTrace();
 
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 

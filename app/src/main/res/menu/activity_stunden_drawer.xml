@@ -22,6 +22,10 @@
             android:id="@+id/nav_k"
             android:icon="@drawable/ic_event_black_24dp"
             android:title="Termine"/>
+        <item
+            android:id="@+id/telefon"
+            android:icon="@drawable/ic_call_black_24dp"
+            android:title="Telefonliste"/>
 
         <item
             android:id="@+id/stundenplan"

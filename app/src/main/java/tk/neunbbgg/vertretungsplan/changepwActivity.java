@@ -122,6 +122,11 @@ public class changepwActivity extends Activity implements View.OnClickListener {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String message = br.readLine();
             System.out.println(message);
+            JSONObject jexit = new JSONObject();
+            jexit.put("command", "exit");
+            jexit.toString();
+            pw.println(jexit);
+            pw.flush();
             pw.close();
             socket.close();
             if (message.equals("true")) {
@@ -164,6 +169,8 @@ public class changepwActivity extends Activity implements View.OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
 
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
