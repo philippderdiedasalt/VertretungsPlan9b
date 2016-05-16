@@ -20,6 +20,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
 
 
+
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
@@ -54,6 +55,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
         personViewHolder.photo.setImageResource(persons.get(i).photoId);
         personViewHolder.photo.setVisibility(persons.get(i).visible);
         personViewHolder.txt2.setText(persons.get(i).txt2);
+        personViewHolder.photo.setOnClickListener(persons.get(i).photoo);
     }
 
     @Override

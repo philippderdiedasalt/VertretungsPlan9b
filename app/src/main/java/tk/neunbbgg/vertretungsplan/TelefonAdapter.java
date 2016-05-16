@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class TelefonAdapter extends RecyclerView.Adapter<TelefonAdapter.TelefonV
 
         CardView cvt;
         TextView name, number;
+        ImageButton tel;
 
 
 
@@ -28,6 +30,7 @@ public class TelefonAdapter extends RecyclerView.Adapter<TelefonAdapter.TelefonV
             cvt = (CardView)itemView.findViewById(R.id.cvt);
             name = (TextView)itemView.findViewById(R.id.name);
             number = (TextView)itemView.findViewById(R.id.number);
+            tel = (ImageButton)itemView.findViewById(R.id.tel);
 
         }
 
@@ -51,6 +54,8 @@ public class TelefonAdapter extends RecyclerView.Adapter<TelefonAdapter.TelefonV
     public void onBindViewHolder(TelefonViewHolder personViewHolder, int i) {
         personViewHolder.name.setText(telefons.get(i).name);
         personViewHolder.number.setText(telefons.get(i).number);
+        personViewHolder.tel.setOnClickListener(telefons.get(i).telo);
+
     }
 
     @Override

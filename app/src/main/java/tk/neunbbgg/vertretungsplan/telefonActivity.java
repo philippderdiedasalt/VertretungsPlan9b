@@ -127,29 +127,199 @@ public class telefonActivity extends AppCompatActivity
         }
 
         **/
-        telefons.add(new Telefon("Kaschin Abdullah", "27866197"));
-        telefons.add(new Telefon("Anneke Brandt", "7135860"));
-        telefons.add(new Telefon("Jason Brötzmann", "72910829"));
-        telefons.add(new Telefon("Arne Butkereit", "71095205"));
-        telefons.add(new Telefon("Nele Butkereit", "7101274"));
-        telefons.add(new Telefon("Thorben Dietrich", "75366453"));
-        telefons.add(new Telefon("Masie Fabian", "21998670"));
-        telefons.add(new Telefon("Daniel Fidel", "67585512"));
-        telefons.add(new Telefon("Robert Gieser", "71141682"));
-        telefons.add(new Telefon("Ana Grimm", "2701915"));
-        telefons.add(new Telefon("Philipp Harms", "71006403"));
-        telefons.add(new Telefon("David Jaeschke", "7111002"));
-        telefons.add(new Telefon("Jonas Janzer", "74109920"));
-        telefons.add(new Telefon("Fiona Kisjeloff", "7149856"));
-        telefons.add(new Telefon("Eric Klemp", "55555466"));
-        telefons.add(new Telefon("Felix Kreutzfeld", "7136784"));
-        telefons.add(new Telefon("Tom Lührs", "73598289"));
-        telefons.add(new Telefon("Leon Maleki", "55005827"));
-        telefons.add(new Telefon("Veronika Rybalkin", "36858134"));
-        telefons.add(new Telefon("Sara Schäfer", "7101249"));
-        telefons.add(new Telefon("Tamim Shams", "35705956"));
-        telefons.add(new Telefon("Mussa Yacob", "8005787"));
-        telefons.add(new Telefon("Thomas Zonca", "32038356"));
+        telefons.add(new Telefon("Kaschin Abdullah", "27866197", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04027866197"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Pilar Binet", "71009790", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04071009790"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Anneke Brandt", "7135860", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407135860"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Jason Brötzmann", "72910829", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04072910829"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Arne Butkereit", "71095205", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04071095205"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Nele Butkereit", "7101274", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407101274"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Thorben Dietrich", "75366453", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04075366453"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Masi Fabian", "21998670", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04021998670"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Daniel Fidel", "67585512", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04067585512"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Robert Gieser", "71141682", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04071141682"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Ana Grimm", "2701915", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0402701915"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Philipp Harms", "71006403", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04071006403"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("David Jaeschke", "7111002", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407111002"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Jonas Janzer", "74109920", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04074109920"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Fiona Kisjeloff", "7149856", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407149856"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Eric Klemp", "55555466", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04055555466"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Felix Kreutzfeld", "7136784", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407136784"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Tom Lührs", "73598289", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04073598289"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Leon Maleki", "55005827", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04055005827"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Veronika Rybalkin", "36858134", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04036858134"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Sara Schäfer", "7101249", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0407101249"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Tamim Shams", "35705956", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04035705956"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Mussa Yacob", "8005787", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:0408005787"));
+                startActivity(i);
+            }
+        }));
+        telefons.add(new Telefon("Thomas Zonca", "32038356", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:04032038356"));
+                startActivity(i);
+            }
+        }));
+        
 
     }
 

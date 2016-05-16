@@ -9,7 +9,7 @@ import android.widget.ImageView;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     ImageView easter;
     Integer x = 0;
-    public static String appversion="4.2.0";
+    public static String appversion="Beta 4.2.1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
